@@ -1743,27 +1743,58 @@ section:last-child { border-bottom: none; }
     <div class="logo-showcase on-dark">
       <!-- Logo SVG — versão principal (ácido sobre preto) -->
       <svg class="logo-svg" width="260" height="72" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Colossus Vault logotipo">
-        <!-- Símbolo: escudo/jaula fraturado -->
-        <g>
-          <!-- Forma principal do escudo -->
-          <path d="M4 4 L32 4 L36 8 L36 36 L20 52 L4 36 Z" fill="none" stroke="#3A8C1C" stroke-width="1.5"/>
-          <!-- Linha interior de fratura -->
-          <path d="M12 16 L28 16 L30 18 L30 32 L20 42 L10 32 L10 18 Z" fill="none" stroke="#8FD62F" stroke-width="1"/>
-          <!-- Fissura diagonal -->
-          <path d="M20 4 L20 52" stroke="#8FD62F" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.6"/>
-          <path d="M4 28 L36 28" stroke="#3A8C1C" stroke-width="0.75" stroke-dasharray="2 6" opacity="0.4"/>
-          <!-- Ponto central — núcleo -->
-          <circle cx="20" cy="28" r="3" fill="#8FD62F"/>
-          <circle cx="20" cy="28" r="6" fill="none" stroke="#8FD62F" stroke-width="0.75" opacity="0.5"/>
-        </g>
-        <!-- Wordmark: COLOSSUS -->
-        <text x="48" y="30" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="900" fill="#D6DCCE" text-anchor="start" letter-spacing="1" text-decoration="none" style="text-transform:uppercase">COLOSSUS</text>
-        <!-- Linha divisória fina -->
-        <line x1="48" y1="36" x2="256" y2="36" stroke="#3A8C1C" stroke-width="0.75" opacity="0.5"/>
-        <!-- Wordmark: VAULT -->
-        <text x="48" y="62" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="900" fill="#8FD62F" text-anchor="start" letter-spacing="8">VAULT</text>
-        <!-- Diamante decorativo após VAULT -->
-        <polygon points="213,50 218,56 213,62 208,56" fill="#6B3FA0" opacity="0.8"/>
+        <defs>
+          <radialGradient id="rg1" cx="50%" cy="52%" r="50%">
+            <stop offset="0%"  stop-color="#8FD62F" stop-opacity="1"/>
+            <stop offset="55%" stop-color="#3A8C1C" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#3A8C1C" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="glow1" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="2.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow2" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="1.2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Escudo: hexágono com topo angular (como um capacete/vault door) -->
+        <path d="M20 2 L34 8 L38 14 L38 36 L20 54 L2 36 L2 14 L6 8 Z"
+          fill="#0D1E0A" stroke="#3A8C1C" stroke-width="1.75"/>
+
+        <!-- Fissuras irradiando do centro para as bordas — 6 raios -->
+        <!-- Topo esquerdo -->
+        <line x1="20" y1="28" x2="6"  y2="8"  stroke="#8FD62F" stroke-width="1.1" stroke-linecap="round" opacity="0.85"/>
+        <!-- Topo direito -->
+        <line x1="20" y1="28" x2="34" y2="8"  stroke="#8FD62F" stroke-width="1.1" stroke-linecap="round" opacity="0.85"/>
+        <!-- Lateral esquerda -->
+        <line x1="20" y1="28" x2="2"  y2="25" stroke="#8FD62F" stroke-width="0.9" stroke-linecap="round" opacity="0.65"/>
+        <!-- Lateral direita -->
+        <line x1="20" y1="28" x2="38" y2="25" stroke="#8FD62F" stroke-width="0.9" stroke-linecap="round" opacity="0.65"/>
+        <!-- Base esquerda -->
+        <line x1="20" y1="28" x2="8"  y2="48" stroke="#8FD62F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+        <!-- Base direita -->
+        <line x1="20" y1="28" x2="32" y2="48" stroke="#8FD62F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+
+        <!-- Aura do núcleo — halo radial -->
+        <ellipse cx="20" cy="28" rx="10" ry="10"
+          fill="url(#rg1)" opacity="0.35"/>
+
+        <!-- Núcleo — oval de energia (o Hulk contido) -->
+        <ellipse cx="20" cy="28" rx="5.5" ry="6"
+          fill="#8FD62F" filter="url(#glow1)"/>
+        <!-- Reflexo interno no núcleo -->
+        <ellipse cx="18.5" cy="25.5" rx="1.8" ry="2"
+          fill="#FFFFE8" opacity="0.5"/>
+        <text x="50" y="29"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="30" font-weight="900" fill="#FFFFE8"
+          letter-spacing="2">COLOSSUS</text>
+        <line x1="50" y1="35" x2="258" y2="35" stroke="#8FD62F" stroke-width="0.75" opacity="0.3"/>
+        <text x="50" y="60"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="22" font-weight="400" fill="#8FD62F"
+          letter-spacing="10">VAULT</text>
       </svg>
       <span class="logo-label" style="color:var(--fog)">Principal — fundo escuro</span>
     </div>
@@ -1772,15 +1803,30 @@ section:last-child { border-bottom: none; }
     <div class="logo-showcase on-void">
       <!-- Logo versão monocromática verde -->
       <svg class="logo-svg" width="260" height="72" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Colossus Vault logotipo monocromático">
-        <g>
-          <path d="M4 4 L32 4 L36 8 L36 36 L20 52 L4 36 Z" fill="none" stroke="#8FD62F" stroke-width="1.5"/>
-          <path d="M12 16 L28 16 L30 18 L30 32 L20 42 L10 32 L10 18 Z" fill="none" stroke="#8FD62F" stroke-width="0.75" opacity="0.6"/>
-          <path d="M20 4 L20 52" stroke="#8FD62F" stroke-width="0.75" stroke-dasharray="2 4" opacity="0.4"/>
-          <circle cx="20" cy="28" r="3" fill="#8FD62F"/>
-        </g>
-        <text x="48" y="30" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="900" fill="#8FD62F" text-anchor="start" letter-spacing="1">COLOSSUS</text>
-        <line x1="48" y1="36" x2="256" y2="36" stroke="#8FD62F" stroke-width="0.75" opacity="0.3"/>
-        <text x="48" y="62" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="900" fill="#8FD62F" text-anchor="start" letter-spacing="8" opacity="0.6">VAULT</text>
+        <defs>
+          <filter id="gm" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="1.8" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <path d="M20 2 L34 8 L38 14 L38 36 L20 54 L2 36 L2 14 L6 8 Z"
+          fill="none" stroke="#8FD62F" stroke-width="1.75" opacity="0.8"/>
+        <line x1="20" y1="28" x2="6"  y2="8"  stroke="#8FD62F" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
+        <line x1="20" y1="28" x2="34" y2="8"  stroke="#8FD62F" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
+        <line x1="20" y1="28" x2="2"  y2="25" stroke="#8FD62F" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/>
+        <line x1="20" y1="28" x2="38" y2="25" stroke="#8FD62F" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/>
+        <line x1="20" y1="28" x2="8"  y2="48" stroke="#8FD62F" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+        <line x1="20" y1="28" x2="32" y2="48" stroke="#8FD62F" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+        <ellipse cx="20" cy="28" rx="5.5" ry="6" fill="#8FD62F" filter="url(#gm)"/>
+        <text x="50" y="29"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="30" font-weight="900" fill="#8FD62F"
+          letter-spacing="2">COLOSSUS</text>
+        <line x1="50" y1="35" x2="258" y2="35" stroke="#8FD62F" stroke-width="0.75" opacity="0.3"/>
+        <text x="50" y="60"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="22" font-weight="400" fill="#8FD62F"
+          letter-spacing="10" opacity="0.65">VAULT</text>
       </svg>
       <span class="logo-label" style="color:var(--grave)">Monocromático</span>
     </div>
@@ -1789,14 +1835,24 @@ section:last-child { border-bottom: none; }
     <div class="logo-showcase on-green">
       <!-- Logo versão invertida — escuro sobre verde -->
       <svg class="logo-svg" width="260" height="72" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Colossus Vault logotipo invertido">
-        <g>
-          <path d="M4 4 L32 4 L36 8 L36 36 L20 52 L4 36 Z" fill="none" stroke="#080C08" stroke-width="1.5"/>
-          <path d="M12 16 L28 16 L30 18 L30 32 L20 42 L10 32 L10 18 Z" fill="none" stroke="#080C08" stroke-width="0.75" opacity="0.5"/>
-          <circle cx="20" cy="28" r="3" fill="#080C08"/>
-        </g>
-        <text x="48" y="30" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="900" fill="#080C08" text-anchor="start" letter-spacing="1">COLOSSUS</text>
-        <line x1="48" y1="36" x2="256" y2="36" stroke="#080C08" stroke-width="0.75" opacity="0.3"/>
-        <text x="48" y="62" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="900" fill="#080C08" text-anchor="start" letter-spacing="8">VAULT</text>
+        <path d="M20 2 L34 8 L38 14 L38 36 L20 54 L2 36 L2 14 L6 8 Z"
+          fill="rgba(0,0,0,0.18)" stroke="#080C08" stroke-width="1.75"/>
+        <line x1="20" y1="28" x2="6"  y2="8"  stroke="#080C08" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
+        <line x1="20" y1="28" x2="34" y2="8"  stroke="#080C08" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
+        <line x1="20" y1="28" x2="2"  y2="25" stroke="#080C08" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/>
+        <line x1="20" y1="28" x2="38" y2="25" stroke="#080C08" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/>
+        <line x1="20" y1="28" x2="8"  y2="48" stroke="#080C08" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+        <line x1="20" y1="28" x2="32" y2="48" stroke="#080C08" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+        <ellipse cx="20" cy="28" rx="5.5" ry="6" fill="#080C08"/>
+        <text x="50" y="29"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="30" font-weight="900" fill="#080C08"
+          letter-spacing="2">COLOSSUS</text>
+        <line x1="50" y1="35" x2="258" y2="35" stroke="#080C08" stroke-width="0.75" opacity="0.3"/>
+        <text x="50" y="60"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="22" font-weight="400" fill="#080C08"
+          letter-spacing="10">VAULT</text>
       </svg>
       <span class="logo-label" style="color:rgba(0,0,0,0.4)">Sobre verde</span>
     </div>
@@ -1805,14 +1861,24 @@ section:last-child { border-bottom: none; }
     <div class="logo-showcase on-acid">
       <!-- Logo versão mínima — símbolo apenas -->
       <svg class="logo-svg" width="260" height="72" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Colossus Vault ícone">
-        <g>
-          <path d="M4 4 L32 4 L36 8 L36 36 L20 52 L4 36 Z" fill="none" stroke="#080C08" stroke-width="2"/>
-          <path d="M12 16 L28 16 L30 18 L30 32 L20 42 L10 32 L10 18 Z" fill="none" stroke="#080C08" stroke-width="1" opacity="0.4"/>
-          <circle cx="20" cy="28" r="3.5" fill="#080C08"/>
-        </g>
-        <text x="48" y="30" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="900" fill="#080C08" text-anchor="start" letter-spacing="1">COLOSSUS</text>
-        <line x1="48" y1="36" x2="256" y2="36" stroke="#080C08" stroke-width="0.75" opacity="0.25"/>
-        <text x="48" y="62" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-size="28" font-weight="900" fill="#080C08" text-anchor="start" letter-spacing="8">VAULT</text>
+        <path d="M20 2 L34 8 L38 14 L38 36 L20 54 L2 36 L2 14 L6 8 Z"
+          fill="rgba(0,0,0,0.18)" stroke="#080C08" stroke-width="1.75"/>
+        <line x1="20" y1="28" x2="6"  y2="8"  stroke="#080C08" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
+        <line x1="20" y1="28" x2="34" y2="8"  stroke="#080C08" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
+        <line x1="20" y1="28" x2="2"  y2="25" stroke="#080C08" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/>
+        <line x1="20" y1="28" x2="38" y2="25" stroke="#080C08" stroke-width="0.9" stroke-linecap="round" opacity="0.5"/>
+        <line x1="20" y1="28" x2="8"  y2="48" stroke="#080C08" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+        <line x1="20" y1="28" x2="32" y2="48" stroke="#080C08" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+        <ellipse cx="20" cy="28" rx="5.5" ry="6" fill="#080C08"/>
+        <text x="50" y="29"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="30" font-weight="900" fill="#080C08"
+          letter-spacing="2">COLOSSUS</text>
+        <line x1="50" y1="35" x2="258" y2="35" stroke="#080C08" stroke-width="0.75" opacity="0.3"/>
+        <text x="50" y="60"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="22" font-weight="400" fill="#080C08"
+          letter-spacing="10">VAULT</text>
       </svg>
       <span class="logo-label" style="color:rgba(0,0,0,0.4)">Sobre ácido</span>
     </div>
@@ -2073,10 +2139,35 @@ section:last-child { border-bottom: none; }
     <div class="mockup-nav">
       <!-- Logo pequeno no nav -->
       <svg width="140" height="32" viewBox="0 0 140 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Colossus Vault" role="img">
-        <path d="M2 2 L16 2 L18 4 L18 18 L10 26 L2 18 Z" fill="none" stroke="#3A8C1C" stroke-width="1"/>
-        <circle cx="10" cy="14" r="2" fill="#8FD62F"/>
-        <text x="24" y="13" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="13" font-weight="900" fill="#D6DCCE" letter-spacing="0.5">COLOSSUS</text>
-        <text x="24" y="28" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-size="13" font-weight="900" fill="#8FD62F" letter-spacing="3">VAULT</text>
+        <defs>
+          <radialGradient id="rn" cx="50%" cy="52%" r="50%">
+            <stop offset="0%"  stop-color="#8FD62F"/>
+            <stop offset="100%" stop-color="#3A8C1C" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="gn2" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="1.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <path d="M8 1 L13.5 3.5 L15.5 6 L15.5 15 L8 22 L0.5 15 L0.5 6 L2.5 3.5 Z"
+          fill="#0D1E0A" stroke="#3A8C1C" stroke-width="1"/>
+        <line x1="8" y1="11.5" x2="2.5" y2="3.5" stroke="#8FD62F" stroke-width="0.85" stroke-linecap="round" opacity="0.85"/>
+        <line x1="8" y1="11.5" x2="13.5" y2="3.5" stroke="#8FD62F" stroke-width="0.85" stroke-linecap="round" opacity="0.85"/>
+        <line x1="8" y1="11.5" x2="0.5" y2="10" stroke="#8FD62F" stroke-width="0.7"  stroke-linecap="round" opacity="0.6"/>
+        <line x1="8" y1="11.5" x2="15.5" y2="10" stroke="#8FD62F" stroke-width="0.7"  stroke-linecap="round" opacity="0.6"/>
+        <line x1="8" y1="11.5" x2="3"   y2="19" stroke="#8FD62F" stroke-width="0.6"  stroke-linecap="round" opacity="0.45"/>
+        <line x1="8" y1="11.5" x2="13"  y2="19" stroke="#8FD62F" stroke-width="0.6"  stroke-linecap="round" opacity="0.45"/>
+        <ellipse cx="8" cy="11.5" rx="3.5" ry="3.8"
+          fill="#8FD62F" filter="url(#gn2)"/>
+        <ellipse cx="7.2" cy="10.2" rx="1.1" ry="1.2"
+          fill="#FFFFE8" opacity="0.45"/>
+        <text x="20" y="12"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="12" font-weight="900" fill="#FFFFE8" letter-spacing="0.5">COLOSSUS</text>
+        <line x1="20" y1="15" x2="138" y2="15" stroke="#8FD62F" stroke-width="0.4" opacity="0.3"/>
+        <text x="20" y="27"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="10" font-weight="400" fill="#8FD62F" letter-spacing="3.5">VAULT</text>
       </svg>
       <div class="mockup-nav-links">
         <span class="mockup-nav-link active">Leilões</span>
@@ -2773,8 +2864,23 @@ section:last-child { border-bottom: none; }
   <p class="eyebrow" style="margin-top:56px">Certificado de Autenticidade</p>
   <div class="cert-mockup" style="margin-top:24px">
     <div class="cert-bg-mark">
-      <svg width="200" height="240" viewBox="0 0 48 60" fill="none">
-        <path d="M4 4 L36 4 L44 12 L44 44 L24 60 L4 44 Z" fill="var(--hulk-green)"/>
+      <svg width="200" height="56" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:20px">
+        <path d="M20 2 L34 8 L38 14 L38 36 L20 54 L2 36 L2 14 L6 8 Z"
+          fill="rgba(58,140,28,0.08)" stroke="#1E5C0A" stroke-width="1.75"/>
+        <line x1="20" y1="28" x2="6"  y2="8"  stroke="#3A8C1C" stroke-width="1.1" stroke-linecap="round" opacity="0.8"/>
+        <line x1="20" y1="28" x2="34" y2="8"  stroke="#3A8C1C" stroke-width="1.1" stroke-linecap="round" opacity="0.8"/>
+        <line x1="20" y1="28" x2="2"  y2="25" stroke="#3A8C1C" stroke-width="0.9" stroke-linecap="round" opacity="0.55"/>
+        <line x1="20" y1="28" x2="38" y2="25" stroke="#3A8C1C" stroke-width="0.9" stroke-linecap="round" opacity="0.55"/>
+        <line x1="20" y1="28" x2="8"  y2="48" stroke="#3A8C1C" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+        <line x1="20" y1="28" x2="32" y2="48" stroke="#3A8C1C" stroke-width="0.8" stroke-linecap="round" opacity="0.4"/>
+        <ellipse cx="20" cy="28" rx="5.5" ry="6" fill="#3A8C1C"/>
+        <text x="50" y="29"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="30" font-weight="900" fill="#0E1E0A" letter-spacing="2">COLOSSUS</text>
+        <line x1="50" y1="35" x2="258" y2="35" stroke="#3A8C1C" stroke-width="0.75" opacity="0.4"/>
+        <text x="50" y="60"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="22" font-weight="400" fill="#3A8C1C" letter-spacing="10">VAULT</text>
       </svg>
     </div>
     <div class="cert-top">
@@ -3030,15 +3136,28 @@ section:last-child { border-bottom: none; }
 
       <!-- Logo em modo claro -->
       <svg width="200" height="56" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:20px">
-        <path d="M8 4 L28 4 L34 10 L34 36 L21 48 L8 36 Z" fill="none" stroke="#1E5C0A" stroke-width="2"/>
-        <path d="M13 10 L26 10 L29 13 L29 32 L21 42 L13 32 L13 13 Z" fill="none" stroke="#3A8C1C" stroke-width="1.25"/>
-        <line x1="13" y1="22" x2="29" y2="22" stroke="#1E5C0A" stroke-width="1"/>
-        <line x1="17" y1="10" x2="25" y2="34" stroke="#3A8C1C" stroke-width="0.75" opacity="0.6"/>
-        <circle cx="21" cy="22" r="2" fill="#3A8C1C"/>
-        <text x="45" y="30" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="26" fill="#0E1E0A" letter-spacing="3">COLOSSUS</text>
-        <line x1="45" y1="34" x2="230" y2="34" stroke="#3A8C1C" stroke-width="0.75" opacity="0.5"/>
-        <text x="45" y="54" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-weight="400" font-size="18" fill="#3A8C1C" letter-spacing="8">VAULT</text>
-        <polygon points="222,46 226,50 222,54 218,50" fill="#3A8C1C"/>
+        <!-- Escudo hexagonal — variante clara -->
+        <path d="M20 3 L35 9 L38 13 L38 34 L20 54 L2 34 L2 13 L5 9 Z"
+          fill="rgba(58,140,28,0.06)" stroke="#1E5C0A" stroke-width="1.25"/>
+        <path d="M20 8 L31 13 L33 16 L33 33 L20 48 L7 33 L7 16 L9 13 Z"
+          fill="none" stroke="#3A8C1C" stroke-width="0.75" opacity="0.5"/>
+        <line x1="7" y1="20" x2="33" y2="20" stroke="#1E5C0A" stroke-width="0.6" opacity="0.4"/>
+        <line x1="7" y1="26" x2="33" y2="26" stroke="#1E5C0A" stroke-width="0.6" opacity="0.4"/>
+        <line x1="14" y1="10" x2="11" y2="45" stroke="#1E5C0A" stroke-width="0.6" opacity="0.3"/>
+        <line x1="26" y1="10" x2="29" y2="45" stroke="#1E5C0A" stroke-width="0.6" opacity="0.3"/>
+        <path d="M9 13 L20 29 L33 16" fill="none" stroke="#1E5C0A" stroke-width="1.25" stroke-linecap="round"/>
+        <path d="M14 29 L20 42 L26 29" fill="none" stroke="#3A8C1C" stroke-width="0.9" opacity="0.6" stroke-linecap="round"/>
+        <polygon points="20,24 24,29 20,34 16,29" fill="none" stroke="#1E5C0A" stroke-width="1"/>
+        <polygon points="20,26 22,29 20,32 18,29" fill="#3A8C1C"/>
+        <circle cx="20" cy="54" r="1.5" fill="#3A8C1C"/>
+        <path d="M31 13 L38 8 L36 16" fill="rgba(58,140,28,0.15)"/>
+        <!-- Wordmark clara -->
+        <text x="50" y="28" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="30" font-weight="900" fill="#0E1E0A" text-anchor="start" letter-spacing="2">COLOSSUS</text>
+        <line x1="50" y1="34" x2="258" y2="34" stroke="#3A8C1C" stroke-width="0.75" opacity="0.5"/>
+        <text x="50" y="60" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif"
+          font-size="22" font-weight="400" fill="#3A8C1C" text-anchor="start" letter-spacing="10">VAULT</text>
+        <polygon points="230,49 234,54 230,59 226,54" fill="#3A8C1C" opacity="0.7"/>
       </svg>
 
       <div class="light-tokens">
@@ -3060,15 +3179,34 @@ section:last-child { border-bottom: none; }
       <div class="demo-label-bar">Variante Escura (principal)</div>
 
       <svg width="200" height="56" viewBox="0 0 260 72" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:20px">
-        <path d="M8 4 L28 4 L34 10 L34 36 L21 48 L8 36 Z" fill="none" stroke="#3A8C1C" stroke-width="2"/>
-        <path d="M13 10 L26 10 L29 13 L29 32 L21 42 L13 32 L13 13 Z" fill="none" stroke="#8FD62F" stroke-width="1.25"/>
-        <line x1="13" y1="22" x2="29" y2="22" stroke="#3A8C1C" stroke-width="1"/>
-        <line x1="17" y1="10" x2="25" y2="34" stroke="#8FD62F" stroke-width="0.75" opacity="0.6"/>
-        <circle cx="21" cy="22" r="2" fill="#8FD62F"/>
-        <text x="45" y="30" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-weight="900" font-size="26" fill="#FFFFE8" letter-spacing="3">COLOSSUS</text>
-        <line x1="45" y1="34" x2="230" y2="34" stroke="#8FD62F" stroke-width="0.75" opacity="0.5"/>
-        <text x="45" y="54" font-family="'Barlow Condensed', 'Arial Narrow', sans-serif" font-weight="400" font-size="18" fill="#8FD62F" letter-spacing="8">VAULT</text>
-        <polygon points="222,46 226,50 222,54 218,50" fill="#8FD62F"/>
+        <defs>
+          <radialGradient id="rdr" cx="50%" cy="52%" r="50%">
+            <stop offset="0%"  stop-color="#8FD62F" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#3A8C1C" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="gdr2" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur stdDeviation="2.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <path d="M20 2 L34 8 L38 14 L38 36 L20 54 L2 36 L2 14 L6 8 Z"
+          fill="#0D1E0A" stroke="#3A8C1C" stroke-width="1.75"/>
+        <line x1="20" y1="28" x2="6"  y2="8"  stroke="#8FD62F" stroke-width="1.1" stroke-linecap="round" opacity="0.85"/>
+        <line x1="20" y1="28" x2="34" y2="8"  stroke="#8FD62F" stroke-width="1.1" stroke-linecap="round" opacity="0.85"/>
+        <line x1="20" y1="28" x2="2"  y2="25" stroke="#8FD62F" stroke-width="0.9" stroke-linecap="round" opacity="0.65"/>
+        <line x1="20" y1="28" x2="38" y2="25" stroke="#8FD62F" stroke-width="0.9" stroke-linecap="round" opacity="0.65"/>
+        <line x1="20" y1="28" x2="8"  y2="48" stroke="#8FD62F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+        <line x1="20" y1="28" x2="32" y2="48" stroke="#8FD62F" stroke-width="0.8" stroke-linecap="round" opacity="0.5"/>
+        <ellipse cx="20" cy="28" rx="10" ry="10" fill="url(#rdr)" opacity="0.35"/>
+        <ellipse cx="20" cy="28" rx="5.5" ry="6" fill="#8FD62F" filter="url(#gdr2)"/>
+        <ellipse cx="18.5" cy="25.5" rx="1.8" ry="2" fill="#FFFFE8" opacity="0.5"/>
+        <text x="50" y="29"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="30" font-weight="900" fill="#FFFFE8" letter-spacing="2">COLOSSUS</text>
+        <line x1="50" y1="35" x2="258" y2="35" stroke="#8FD62F" stroke-width="0.75" opacity="0.3"/>
+        <text x="50" y="60"
+          font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+          font-size="22" font-weight="400" fill="#8FD62F" letter-spacing="10">VAULT</text>
       </svg>
 
       <div style="font-size:12px;font-weight:300;color:var(--fog);line-height:1.7;margin-top:8px">
