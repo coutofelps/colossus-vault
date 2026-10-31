@@ -31,7 +31,7 @@ export default function Home() {
       </p>
 
       <Link
-        to="/brand"
+        to="/brand-identity"
         style={{
           display: 'inline-flex',
           alignItems: 'center',
