@@ -1,10 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Colors */
+  --abyss: #080C08;
+  --void: #101610;
+  --crypt: #1C0E30;
+  --hulk-green: #3A8C1C;
+  --acid: #8FD62F;
+  --grave: #5A6B52;
+  --fog: #A8B89C;
+  --bone: #D6DCCE;
+  --scar: #FFFFE8;
+  --purple-vein: #6B3FA0;
+  --purple-glow: #9D5FD6;
+
+  /* Alternate palette (Cinza & Roxo) */
+  --alt-scar: #E8E8E8;
+  --alt-acid: #9A9A9A;
+  --alt-purple: #A050FF;
+
+  /* Borders */
+  --border: rgba(143, 214, 47, 0.15);
+  --border-mid: rgba(143, 214, 47, 0.35);
+
+  /* Typography */
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  /* Layout */
+  --max-w: 1100px;
+  --gutter: max(20px, env(safe-area-inset-left));
+  --nav-h: 64px;
+}
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
-  background: #080C08;
-  color: #D6DCCE;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--abyss);
+  color: var(--bone);
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+:root[data-theme="alt"] {
+  /* Troca verde ácido por roxo elétrico como acento principal */
+  --acid: var(--alt-purple);
+  --purple-glow: var(--alt-purple);
+  --purple-vein: var(--alt-purple);
+
+  /* Neutraliza os cinzas com viés verde */
+  --abyss: #090909;                  /* preto neutro */
+  --void:  #111111;                  /* superfície neutra — sem verde */
+  --scar: var(--alt-scar);          /* #E8E8E8 — neutro */
+  --bone: #C8C8C8;                   /* #D6DCCE esverdeado → cinza neutro */
+  --fog:  #8A8A8A;                   /* #A8B89C esverdeado → cinza neutro */
+  --grave: #606060;                  /* #5A6B52 esverdeado → cinza neutro */
+
+  /* Bordas sem viés verde */
+  --border: rgba(160, 80, 255, 0.12);
+  --border-mid: rgba(160, 80, 255, 0.30);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
