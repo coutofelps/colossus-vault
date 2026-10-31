@@ -24,10 +24,10 @@
 ### Frontend
 - [x] Setup React + Vite + TypeScript
 - [x] Identidade visual documentada (`docs/brand-identity/`) e tokens definidos
-- [ ] Design system base — tokens CSS, tipografia, componentes primitivos (botão, badge, input, contador)
-- [ ] Layout global — navegação, estrutura de página, responsividade
-- [ ] Página de listagem de leilões — cards com foto, título, lance atual, cronômetro
-- [ ] Página do leilão — galeria de fotos, cronômetro ao vivo, histórico de lances, formulário de lance
+- [x] Design system base — tokens CSS (`:root`), tipografia (Barlow Condensed + DM Sans), componentes primitivos (Button, Badge, Countdown, ImageGallery)
+- [x] Layout global — Navbar responsiva com menu mobile + tema alternável, Footer, ThemeContext
+- [x] Página de listagem de leilões — cards com foto, título, lance atual, cronômetro, badge de status
+- [x] Página do leilão (`/auctions/:id`) — galeria com auto-slide, lightbox, cronômetro ao vivo, histórico de lances, botão DAR LANCE fixo no mobile
 - [ ] Página de criação de leilão (vendedor) — formulário com todos os campos da spec
 
 ### Técnico

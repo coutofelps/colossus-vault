@@ -27,7 +27,7 @@ Adotar a seguinte stack:
 
 | Camada | Tecnologia | Versão |
 |---|---|---|
-| UI | React | 18 |
+| UI | React | 19 |
 | Build | Vite | 6 |
 | Linguagem | TypeScript | 5 |
 | Roteamento | React Router DOM | 6 |
