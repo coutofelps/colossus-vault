@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import Brand from './pages/Brand'
+import BrandIdentity from './pages/BrandIdentity'
 import Home from './pages/Home'
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/brand-identity" element={<Brand />} />
+        <Route path="/brand-identity" element={<BrandIdentity />} />
       </Routes>
     </BrowserRouter>
   )
