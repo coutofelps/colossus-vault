@@ -118,7 +118,7 @@ colossus-vault/
 │       ├── App.tsx                  # Rotas
 │       └── index.css                # Reset e fonte global
 ├── docs/
-│   ├── brand/
+│   ├── brand-identity/
 │   │   ├── index.html               # Fonte da verdade — identidade visual completa
 │   │   └── tokens.md                # Design tokens (espelho para devs e IA)
 │   ├── product/
@@ -143,7 +143,7 @@ A documentação do projeto é orientada a IA — estruturada para que agentes c
 | [`docs/product/glossary.md`](docs/product/glossary.md) | Glossário: Leilão, Lance, Lote, Proxy, Anti-snipe… |
 | [`docs/product/roadmap.md`](docs/product/roadmap.md) | Fases de desenvolvimento |
 | [`docs/specs/auction-flow.md`](docs/specs/auction-flow.md) | Regras completas do leilão — estados, lances, encerramento, casos de borda |
-| [`docs/brand/tokens.md`](docs/brand/tokens.md) | Design tokens — paleta, tipografia, espaçamento |
+| [`docs/brand-identity/tokens.md`](docs/brand-identity/tokens.md) | Design tokens — paleta, tipografia, espaçamento |
 | [`CLAUDE.md`](CLAUDE.md) | Ponto de entrada para agentes de IA |
 
 ---
