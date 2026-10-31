@@ -46,10 +46,14 @@ export default function ImageGallery({ images, autoInterval = 4000 }: Props) {
     return () => window.removeEventListener('keydown', onKey)
   }, [prev, next, closeLightbox])
 
-  // Scroll-lock quando lightbox aberto
+  // Scroll-lock quando lightbox aberto (usa dataset para não conflitar com Navbar)
   useEffect(() => {
-    document.body.style.overflow = lightbox ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    if (lightbox) {
+      document.documentElement.dataset.scrollLockGallery = '1'
+    } else {
+      delete document.documentElement.dataset.scrollLockGallery
+    }
+    return () => { delete document.documentElement.dataset.scrollLockGallery }
   }, [lightbox])
 
   return (

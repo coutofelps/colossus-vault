@@ -15,10 +15,14 @@ export default function Navbar() {
   // Fecha o menu ao navegar
   useEffect(() => { setMenuOpen(false) }, [pathname])
 
-  // Bloqueia scroll quando menu está aberto
+  // Bloqueia scroll quando menu está aberto (usa dataset para não conflitar com ImageGallery)
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    if (menuOpen) {
+      document.documentElement.dataset.scrollLockNav = '1'
+    } else {
+      delete document.documentElement.dataset.scrollLockNav
+    }
+    return () => { delete document.documentElement.dataset.scrollLockNav }
   }, [menuOpen])
 
   return (

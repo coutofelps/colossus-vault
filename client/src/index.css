@@ -64,6 +64,12 @@ html, body {
   --border-mid: rgba(160, 80, 255, 0.30);
 }
 
+/* Scroll-lock coordenado — cada componente seta seu próprio atributo; qualquer um ativo bloqueia */
+html[data-scroll-lock-nav],
+html[data-scroll-lock-gallery] {
+  overflow: hidden;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

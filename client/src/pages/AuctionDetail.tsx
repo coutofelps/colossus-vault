@@ -1,3 +1,4 @@
+import { useState, useCallback } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -37,7 +38,9 @@ export default function AuctionDetail() {
   }
 
   const images = getImages(auction)
-  const isActive = auction.status === 'active'
+  const [ended, setEnded] = useState(false)
+  const handleCountdownEnd = useCallback(() => setEnded(true), [])
+  const isActive = auction.status === 'active' && !ended
 
   return (
     <div className={styles.page}>
@@ -89,10 +92,10 @@ export default function AuctionDetail() {
                   </div>
                 )}
 
-                {isActive && (
+                {auction.status === 'active' && (
                   <div className={styles.countdownWrap}>
                     <span className={styles.countdownLabel}>Encerra em</span>
-                    <Countdown endsAt={auction.endsAt} size="md" />
+                    <Countdown endsAt={auction.endsAt} size="md" onEnd={handleCountdownEnd} />
                   </div>
                 )}
 
