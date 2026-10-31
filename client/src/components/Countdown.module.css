@@ -1,0 +1,37 @@
+.root {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--bone);
+  font-variant-numeric: tabular-nums;
+}
+
+.sm { font-size: 18px; }
+.md { font-size: 28px; }
+.lg { font-size: 42px; }
+
+.sep { color: var(--grave); }
+
+.segment abbr {
+  font-size: 0.55em;
+  font-weight: 600;
+  color: var(--grave);
+  text-decoration: none;
+  margin-left: 1px;
+}
+
+.urgent { color: var(--acid); }
+.urgent .sep { color: color-mix(in srgb, var(--acid) 50%, transparent); }
+.urgent .segment abbr { color: color-mix(in srgb, var(--acid) 60%, transparent); }
+
+.ended {
+  font-size: inherit;
+  color: var(--grave);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}

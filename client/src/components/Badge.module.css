@@ -1,0 +1,35 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 4px 10px;
+  border-radius: 2px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot { animation: none; }
+}
+
+.active  { color: var(--acid);  background: color-mix(in srgb, var(--acid) 12%, transparent); border: 1px solid color-mix(in srgb, var(--acid) 30%, transparent); }
+.closed  { color: var(--grave); background: rgba(90, 107, 82, 0.15);  border: 1px solid rgba(90, 107, 82, 0.3); }
+.draft   { color: var(--fog);   background: rgba(168, 184, 156, 0.1); border: 1px solid rgba(168, 184, 156, 0.2); }
+.review  { color: var(--purple-glow); background: rgba(157, 95, 214, 0.12); border: 1px solid rgba(157, 95, 214, 0.3); }
+.no-winner { color: var(--fog); background: rgba(90, 107, 82, 0.1);   border: 1px solid rgba(90, 107, 82, 0.2); }

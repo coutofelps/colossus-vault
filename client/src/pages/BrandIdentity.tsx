@@ -1,7 +1,10 @@
+import usePageTitle from '../hooks/usePageTitle'
+
 export default function Brand() {
+  usePageTitle('Identidade Visual')
   return (
     <iframe
-      src="/brand/index.html"
+      src="/brand-identity/index.html"
       style={{
         position: 'fixed',
         inset: 0,

@@ -1,0 +1,20 @@
+import { ReactNode } from 'react'
+import Navbar from './Navbar'
+import Footer from './Footer'
+import styles from './PageLayout.module.css'
+
+interface PageLayoutProps {
+  children: ReactNode
+}
+
+export default function PageLayout({ children }: PageLayoutProps) {
+  return (
+    <div className={styles.wrapper}>
+      <Navbar />
+      <main className={styles.main}>
+        {children}
+      </main>
+      <Footer />
+    </div>
+  )
+}

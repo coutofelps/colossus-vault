@@ -1,55 +1,38 @@
 import { Link } from 'react-router-dom'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import Button from '../components/Button'
+import usePageTitle from '../hooks/usePageTitle'
+import styles from './Home.module.css'
 
 export default function Home() {
+  usePageTitle('')
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: '#080C08',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontFamily: "'DM Sans', system-ui, sans-serif",
-      color: '#D6DCCE',
-      gap: '32px',
-    }}>
-      <h1 style={{
-        fontFamily: "'Barlow Condensed', 'Arial Narrow', sans-serif",
-        fontSize: 'clamp(48px, 10vw, 120px)',
-        fontWeight: 900,
-        textTransform: 'uppercase',
-        color: '#FFFFE8',
-        letterSpacing: '-0.01em',
-        lineHeight: 0.88,
-        margin: 0,
-      }}>
-        Colossus <span style={{ color: '#8FD62F' }}>Vault</span>
-      </h1>
-
-      <p style={{ color: '#A8B89C', fontSize: '14px', fontWeight: 300, margin: 0 }}>
-        Em construção
-      </p>
-
-      <Link
-        to="/brand-identity"
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '10px',
-          background: 'transparent',
-          color: '#8FD62F',
-          fontFamily: "'Barlow Condensed', sans-serif",
-          fontSize: '13px',
-          fontWeight: 700,
-          textTransform: 'uppercase',
-          letterSpacing: '0.1em',
-          padding: '10px 20px',
-          border: '1px solid rgba(143, 214, 47, 0.35)',
-          textDecoration: 'none',
-        }}
-      >
-        Brand Identity →
-      </Link>
+    <div className={styles.page}>
+      <Navbar />
+      <div className={styles.hero}>
+        <div className={styles.grid} aria-hidden />
+        <div className={styles.glow} aria-hidden />
+        <div className={styles.content}>
+          <p className={styles.eyebrow}>A primeira plataforma premium de leilão de estátuas</p>
+          <h1 className={styles.heading}>
+            Colossus<br /><em>Vault</em>
+          </h1>
+          <p className={styles.sub}>
+            Action figures raros e colecionáveis verificados.<br />
+            Leilões reais, vendedores confiáveis, sem WhatsApp.
+          </p>
+          <div className={styles.ctas}>
+            <Link to="/auctions">
+              <Button size="lg">Ver Leilões</Button>
+            </Link>
+            <Link to="/brand-identity">
+              <Button variant="ghost" size="lg">Brand Identity →</Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <Footer />
     </div>
   )
 }
