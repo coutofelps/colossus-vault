@@ -144,6 +144,7 @@ A documentação do projeto é orientada a IA — estruturada para que agentes c
 | [`docs/product/roadmap.md`](docs/product/roadmap.md) | Fases de desenvolvimento |
 | [`docs/specs/auction-flow.md`](docs/specs/auction-flow.md) | Regras completas do leilão — estados, lances, encerramento, casos de borda |
 | [`docs/brand-identity/tokens.md`](docs/brand-identity/tokens.md) | Design tokens — paleta, tipografia, espaçamento |
+| [`docs/decisions/ADR-001-tech-stack.md`](docs/decisions/ADR-001-tech-stack.md) | ADR-001 — Stack técnico inicial (React, Fastify, PostgreSQL) |
 | [`CLAUDE.md`](CLAUDE.md) | Ponto de entrada para agentes de IA |
 
 ---
@@ -169,15 +170,13 @@ O guia completo de marca está disponível em `/brand-identity` na aplicação.
 
 ## 🗺️ Roadmap
 
-- [x] Identidade visual e brand identity
-- [x] Documentação do produto (visão, glossário, specs)
-- [x] Frontend base — React + Vite + TypeScript
-- [ ] Spec e implementação do sistema de usuários
-- [ ] Backend — API de leilões com Fastify + PostgreSQL
-- [ ] Lances em tempo real via WebSocket
-- [ ] Painel do vendedor
-- [ ] Sistema de notificações
-- [ ] Integração de pagamento
+O roadmap completo está em [`docs/product/roadmap.md`](docs/product/roadmap.md). Resumo das fases:
+
+| Fase | Foco | Status |
+|---|---|---|
+| **Fase 1 — Fundação** | MVP: leilões funcionais, lances, anti-snipe, encerramento automático | 🔨 Em andamento |
+| **Fase 2 — Consolidação** | Painel do vendedor, Compre Agora, busca, notificações, filas | 📋 Planejado |
+| **Fase 3 — Escala** | Histórico de preços, reputação, pagamento nativo, app mobile | 🔭 Futuro |
 
 ---
 
