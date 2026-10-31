@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import BrandIdentity from './pages/BrandIdentity'
 import Home from './pages/Home'
 
