@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Button from '../components/Button'
@@ -9,6 +9,7 @@ import styles from './Login.module.css'
 
 export default function Login() {
   usePageTitle('Entrar')
+  const navigate = useNavigate()
   const { theme } = useTheme()
   const icon = theme === 'alt'
     ? '/brand-identity/assets/grey-version-icon.png'
@@ -21,6 +22,8 @@ export default function Login() {
   const [remember, setRemember] = useState(() => {
     try { return !!localStorage.getItem('cv_remember_email') } catch { return false }
   })
+  const location = useLocation()
+  const passwordReset = (location.state as { passwordReset?: boolean } | null)?.passwordReset ?? false
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
 
   function validate() {
@@ -40,7 +43,7 @@ export default function Login() {
       if (remember) localStorage.setItem('cv_remember_email', email)
       else localStorage.removeItem('cv_remember_email')
     } catch { /* ignore */ }
-    // TODO: autenticação real
+    navigate('/dashboard')
   }
 
   return (
@@ -56,6 +59,12 @@ export default function Login() {
               </span>
             </Link>
           </div>
+
+          {passwordReset && (
+            <div className={styles.successBanner}>
+              Senha atualizada. Faça login com sua nova senha.
+            </div>
+          )}
 
           <h1 className={styles.heading}>Entrar</h1>
           <p className={styles.sub}>Acesse sua conta para dar lances e acompanhar seus leilões</p>

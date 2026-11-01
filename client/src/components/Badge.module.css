@@ -28,8 +28,9 @@
   .dot { animation: none; }
 }
 
-.active  { color: var(--acid);  background: color-mix(in srgb, var(--acid) 12%, transparent); border: 1px solid color-mix(in srgb, var(--acid) 30%, transparent); }
-.closed  { color: var(--grave); background: rgba(90, 107, 82, 0.15);  border: 1px solid rgba(90, 107, 82, 0.3); }
-.draft   { color: var(--fog);   background: rgba(168, 184, 156, 0.1); border: 1px solid rgba(168, 184, 156, 0.2); }
-.review  { color: var(--purple-glow); background: rgba(157, 95, 214, 0.12); border: 1px solid rgba(157, 95, 214, 0.3); }
-.no-winner { color: var(--fog); background: rgba(90, 107, 82, 0.1);   border: 1px solid rgba(90, 107, 82, 0.2); }
+/* Cores fixas — não variam com tema */
+.active    { color: #7DC82A; background: #1C3A0D; border: 1px solid #2E6114; }
+.closed    { color: #9AB08E; background: #1E231E; border: 1px solid #2E3A2E; }
+.draft     { color: #9AB08E; background: #1E231E; border: 1px solid #2E3A2E; }
+.review    { color: #C07AFF; background: #24103D; border: 1px solid #4A1E80; }
+.no-winner { color: #9AB08E; background: #1E231E; border: 1px solid #2E3A2E; }

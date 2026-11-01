@@ -86,7 +86,7 @@ Não há link para cadastro — o registro é feito pelo admin.
 - [ ] E-mail com formato inválido impede o submit e exibe mensagem de erro
 - [ ] Senha vazia impede o submit e exibe mensagem de erro
 - [ ] Erros exibidos inline abaixo de cada campo com borda vermelha no input
-- [ ] Submit sem erros limpa as mensagens e dispara a autenticação
+- [ ] Submit sem erros limpa as mensagens, autentica e redireciona para `/dashboard`
 - [ ] Checkbox "Lembrar-me" salva o e-mail em `localStorage` ao submeter com sucesso
 - [ ] Na próxima visita, campo e-mail é pré-preenchido e checkbox aparece marcado
 - [ ] Desmarcar e submeter apaga o e-mail salvo
@@ -99,7 +99,7 @@ Não há link para cadastro — o registro é feito pelo admin.
 
 | Situação | Comportamento esperado |
 |---|---|
-| Usuário já autenticado acessa `/login` | Redirect para `/account` |
+| Usuário já autenticado acessa `/login` | Redirect para `/dashboard` |
 | Credenciais inválidas (resposta da API) | Exibir mensagem de erro geral abaixo do formulário |
 | Erro de rede durante o submit | Exibir mensagem de erro genérica; botão volta ao estado normal |
 

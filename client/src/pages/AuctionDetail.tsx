@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -39,8 +39,23 @@ export default function AuctionDetail() {
 
   const images = getImages(auction)
   const [ended, setEnded] = useState(false)
-  const handleCountdownEnd = useCallback(() => setEnded(true), [])
+  const [showEndAnimation, setShowEndAnimation] = useState(false)
+  const handleCountdownEnd = useCallback(() => {
+    setEnded(true)
+    setShowEndAnimation(true)
+  }, [])
   const isActive = auction.status === 'active' && !ended
+
+  const [proxyEnabled, setProxyEnabled] = useState(false)
+  const [proxyValue, setProxyValue] = useState('')
+  const proxyInputRef = useRef<HTMLInputElement>(null)
+
+  function handleProxyToggle() {
+    const next = !proxyEnabled
+    setProxyEnabled(next)
+    if (next) setTimeout(() => proxyInputRef.current?.focus(), 0)
+    else setProxyValue('')
+  }
 
   return (
     <div className={styles.page}>
@@ -105,6 +120,43 @@ export default function AuctionDetail() {
                   </p>
                 )}
 
+                {isActive && (
+                  <div className={styles.proxyWrap}>
+                    <button
+                      type="button"
+                      className={`${styles.proxyToggle} ${proxyEnabled ? styles.proxyToggleOn : ''}`}
+                      onClick={handleProxyToggle}
+                    >
+                      <span className={styles.proxyToggleBox} />
+                      Lance Proxy
+                    </button>
+                    {proxyEnabled && (
+                      <div className={styles.proxyField}>
+                        <label htmlFor="proxy-max" className={styles.proxyLabel}>
+                          Seu valor máximo
+                        </label>
+                        <div className={styles.proxyInputRow}>
+                          <span className={styles.proxyCurrency}>R$</span>
+                          <input
+                            ref={proxyInputRef}
+                            id="proxy-max"
+                            type="number"
+                            min={auction.currentBid + auction.increment}
+                            step={auction.increment}
+                            placeholder={(auction.currentBid + auction.increment).toString()}
+                            value={proxyValue}
+                            onChange={e => setProxyValue(e.target.value)}
+                            className={styles.proxyInput}
+                          />
+                        </div>
+                        <p className={styles.proxyHint}>
+                          O sistema dará o menor lance necessário para mantê-lo na liderança, até este limite. O valor máximo é oculto dos outros compradores.
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                )}
+
                 <Button
                   variant={isActive ? 'primary' : 'outline'}
                   size="lg"
@@ -153,6 +205,29 @@ export default function AuctionDetail() {
           </div>
         </div>
       </main>
+
+      {/* Animação de encerramento */}
+      {showEndAnimation && (
+        <div className={styles.endOverlay} onClick={() => setShowEndAnimation(false)}>
+          <div className={styles.endCard}>
+            <div className={styles.endHammer}>🔨</div>
+            <h2 className={styles.endTitle}>Leilão encerrado!</h2>
+            {auction.bids.length > 0 ? (
+              <>
+                <p className={styles.endSub}>Vencedor</p>
+                <p className={styles.endWinner}>{auction.bids[0].user}</p>
+                <p className={styles.endAmount}>{fmt(auction.bids[0].value)}</p>
+              </>
+            ) : (
+              <p className={styles.endSub}>Nenhum lance registrado.</p>
+            )}
+            <button className={styles.endClose} onClick={() => setShowEndAnimation(false)}>
+              Fechar
+            </button>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   )

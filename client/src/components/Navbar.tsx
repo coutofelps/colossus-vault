@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
+import { mockUser } from '../data/mockAccount'
 import styles from './Navbar.module.css'
+
+// Mock: troque para false para ver o estado deslogado
+const MOCK_LOGGED_IN = true
 
 export default function Navbar() {
   const { theme, toggle } = useTheme()
@@ -12,10 +16,8 @@ export default function Navbar() {
     ? '/brand-identity/assets/grey-version-icon.png'
     : '/brand-identity/assets/green-version-icon.png'
 
-  // Fecha o menu ao navegar
   useEffect(() => { setMenuOpen(false) }, [pathname])
 
-  // Bloqueia scroll quando menu está aberto (usa dataset para não conflitar com ImageGallery)
   useEffect(() => {
     if (menuOpen) {
       document.documentElement.dataset.scrollLockNav = '1'
@@ -24,6 +26,9 @@ export default function Navbar() {
     }
     return () => { delete document.documentElement.dataset.scrollLockNav }
   }, [menuOpen])
+
+  const navigate = useNavigate()
+  const firstName = mockUser.name.split(' ')[0]
 
   return (
     <>
@@ -47,10 +52,28 @@ export default function Navbar() {
                 Loja da Galera
               </NavLink>
             </li>
+            {MOCK_LOGGED_IN && (
+              <>
+                <li>
+                  <NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.active : ''}>
+                    Área do Comprador
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/payments" className={({ isActive }) => isActive ? styles.active : ''}>
+                    Pagamentos
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
 
           <div className={styles.actions}>
-            <Link to="/login" className={styles.loginBtn}>Entrar</Link>
+            {MOCK_LOGGED_IN ? (
+              <NavLink to="/dashboard" className={styles.userChip}>{firstName}</NavLink>
+            ) : (
+              <Link to="/login" className={styles.loginBtn}>Entrar</Link>
+            )}
             <button
               className={styles.hamburger}
               onClick={() => setMenuOpen(o => !o)}
@@ -65,14 +88,12 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Backdrop */}
       <div
         className={`${styles.backdrop} ${menuOpen ? styles.backdropOpen : ''}`}
         onClick={() => setMenuOpen(false)}
         aria-hidden
       />
 
-      {/* Mobile dropdown — fora do header para escapar do stacking context do backdrop-filter */}
       <div
         className={`${styles.dropdown} ${menuOpen ? styles.dropdownOpen : ''}`}
         aria-hidden={!menuOpen}
@@ -84,26 +105,26 @@ export default function Navbar() {
         <NavLink to="/under-development" className={({ isActive }) => `${styles.mobileLink} ${isActive ? styles.mobileLinkActive : ''}`}>
           Loja da Galera
         </NavLink>
-        <div className={styles.mobileDivider} />
-        <div className={styles.mobileThemeSection}>
-          <span className={styles.mobileThemeLabel}>Paleta</span>
-          <div className={styles.mobileThemeOptions}>
-            <button
-              className={`${styles.mobileThemeBtn} ${theme === 'default' ? styles.mobileThemeBtnActive : ''}`}
-              onClick={() => { if (theme !== 'default') toggle() }}
-            >
-              <span className={styles.mobileThemeSwatch} style={{ background: '#8FD62F' }} />
-              Principal
-            </button>
-            <button
-              className={`${styles.mobileThemeBtn} ${theme === 'alt' ? styles.mobileThemeBtnActive : ''}`}
-              onClick={() => { if (theme !== 'alt') toggle() }}
-            >
-              <span className={styles.mobileThemeSwatch} style={{ background: '#A050FF' }} />
-              Alternativa
-            </button>
-          </div>
-        </div>
+
+        {MOCK_LOGGED_IN && (
+          <>
+            <div className={styles.mobileDivider} />
+            <NavLink to="/dashboard" className={({ isActive }) => `${styles.mobileLink} ${isActive ? styles.mobileLinkActive : ''}`}>
+              Área do Comprador
+            </NavLink>
+            <div className={styles.mobileDivider} />
+            <NavLink to="/payments" className={({ isActive }) => `${styles.mobileLink} ${isActive ? styles.mobileLinkActive : ''}`}>
+              Pagamentos
+            </NavLink>
+            <div className={styles.mobileDivider} />
+            <NavLink to="/account" className={({ isActive }) => `${styles.mobileLink} ${isActive ? styles.mobileLinkActive : ''}`}>
+              Dados da Conta
+            </NavLink>
+            <div className={styles.mobileDivider} />
+            <button className={styles.mobileLogoutBtn} onClick={() => navigate('/')}>Sair</button>
+          </>
+        )}
+
       </div>
     </>
   )

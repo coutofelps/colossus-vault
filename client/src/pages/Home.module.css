@@ -95,3 +95,20 @@
 .ctas a {
   text-decoration: none;
 }
+
+@media (max-width: 600px) {
+  .ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ctas a,
+  .ctas > * {
+    width: 100%;
+  }
+
+  .ctas a button,
+  .ctas > button {
+    width: 100%;
+  }
+}

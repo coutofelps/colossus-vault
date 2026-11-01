@@ -1,0 +1,248 @@
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding-block: 40px;
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.pageHeader {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 32px;
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--acid);
+}
+
+.accountLink {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fog);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.accountLink:hover { color: var(--acid); }
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--scar);
+  line-height: 0.9;
+}
+
+/* ── Lista ────────────────────────────────────────────────────────────────── */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Card ─────────────────────────────────────────────────────────────────── */
+.card {
+  display: flex;
+  gap: 20px;
+  background: var(--void);
+  border: 1px solid var(--border);
+  padding: 20px;
+  transition: border-color 0.15s;
+}
+
+.card:hover { border-color: var(--border-mid); }
+
+.thumb {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  background: var(--abyss);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--scar);
+  text-decoration: none;
+  line-height: 1.2;
+  transition: color 0.15s;
+}
+
+.title:hover { color: var(--acid); }
+
+.seller {
+  font-size: 12px;
+  color: var(--grave);
+  margin-top: 3px;
+}
+
+.status {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 10px;
+  border-radius: 2px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Cores fixas — não variam com tema */
+.statusPending {
+  background: #1E231E;
+  color: #9AB08E;
+  border: 1px solid #2E3A2E;
+}
+
+.statusProgress {
+  background: #1C3A0D;
+  color: #7DC82A;
+  border: 1px solid #2E6114;
+}
+
+.statusDone {
+  background: #1E231E;
+  color: #9AB08E;
+  border: 1px solid #2E3A2E;
+}
+
+.meta {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.metaItem {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metaLabel {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--grave);
+}
+
+.metaValue {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bone);
+  font-variant-numeric: tabular-nums;
+}
+
+.progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progressTrack {
+  height: 2px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--acid);
+  border-radius: 2px;
+}
+
+.progressLabel {
+  font-size: 11px;
+  color: var(--grave);
+}
+
+/* ── Empty state ──────────────────────────────────────────────────────────── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 48px 0;
+}
+
+.emptyText {
+  font-size: 14px;
+  color: var(--fog);
+}
+
+.emptyLink {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--acid);
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.emptyLink:hover { opacity: 0.75; }
+
+@media (max-width: 600px) {
+  .card { flex-direction: column; }
+  .thumb { width: 100%; height: 160px; }
+  .thumb img { object-fit: contain; }
+  .header { flex-direction: column; }
+}

@@ -5,6 +5,18 @@
   flex-direction: column;
 }
 
+.mainBare {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 48px 0;
+}
+
+.mainBare .code {
+  font-size: 48px;
+}
+
 .main {
   flex: 1;
   display: flex;

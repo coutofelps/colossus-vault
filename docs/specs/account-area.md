@@ -8,121 +8,92 @@ Define as telas, fluxos e regras de negócio da área logada para compradores no
 
 ## Visão Geral
 
-A área logada é o espaço privado do comprador dentro do Colossus Vault. Ela centraliza tudo que é pessoal ao usuário: seus lances em andamento, leilões que está acompanhando, vitórias e dados de conta. O acesso é exclusivo para usuários com sessão ativa — qualquer rota da área redireciona para `/login` se não houver sessão.
+A área logada é o espaço privado do comprador. Ela centraliza seus lances em andamento, loja pessoal e dados de conta. O acesso é exclusivo para usuários com sessão ativa — qualquer rota da área redireciona para `/login` se não houver sessão.
 
 Objetivos da área logada:
 
 - Dar ao comprador visibilidade sobre sua participação ativa nos leilões
 - Registrar o histórico de vitórias e facilitar o contato com o admin para pagamento
 - Permitir gerenciamento básico de dados de conta
+- Oferecer ponto de entrada para anunciar itens como vendedor
 
 ---
 
 ## Rotas e Navegação
 
-Todas as rotas da área logada ficam sob o prefixo `/account`.
-
 | Rota | Página |
 |---|---|
-| `/account` | Dashboard: lances ativos e leilões acompanhados |
-| `/account/bids` | Meus Lances |
-| `/account/watchlist` | Leilões Acompanhados |
-| `/account/payments` | Meus Pagamentos |
-| `/account/profile` | Dados da Conta |
+| `/dashboard` | Dashboard: lances ativos e minha loja |
+| `/bids` | Meus Lances — a implementar |
+| `/payments` | Meus Pagamentos |
+| `/account` | Dados da Conta |
 
-A navegação entre as sub-páginas usa um menu lateral no desktop e um menu em abas no mobile. A Navbar do site exibe o nome do usuário logado no lugar do botão "Entrar", com um dropdown que dá acesso à área e ao logout.
-
----
-
-## Dashboard
-
-A rota `/account` é a página inicial da área logada. Em vez de redirecionar, exibe uma visão combinada e resumida das duas listas de maior interesse imediato do usuário.
-
-### Seção: Participando
-
-Lista os leilões em que o usuário já deu pelo menos um lance e que ainda estão `ATIVO`. Exibe até 6 cards. Link "Ver todos" aponta para `/account/bids`.
-
-Cada card exibe: thumbnail, título, **seu lance**, **lance atual**, status (**Na liderança** / **Superado**) e countdown compacto.
-
-Card com status **Superado** recebe destaque visual (borda em vermelho ou badge).
-
-### Seção: Acompanhando
-
-Lista os leilões salvos pelo usuário em que ele ainda não deu lance. Exibe até 6 cards. Link "Ver todos" aponta para `/account/watchlist`.
-
-Cada card exibe: thumbnail, título, lance atual, countdown compacto e botão "Dar Lance" inline.
-
-> Se o usuário não tem lances nem leilões acompanhados, a página exibe um estado vazio com chamada para explorar leilões.
+A Navbar exibe o nome do usuário logado como chip-link para `/dashboard` no desktop, com links diretos para "Área do Comprador" e "Pagamentos". No mobile, o menu expandido lista todas as rotas da área logada e a opção "Sair". Não há dropdown.
 
 ---
 
-## Meus Lances
+## Dashboard (`/dashboard`)
+
+Página inicial da área logada. Exibe botão **Sair** (redireciona para `/`) e link **Minha Conta →** no header.
+
+### Seção: Leilões
+
+Lista os leilões em que o usuário já deu pelo menos um lance e que ainda estão `ATIVO`. Exibe até 6 cards. Link "Ver todos" aparece quando há 6 ou mais itens, apontando para `/bids`.
+
+Cada card exibe: thumbnail, título, **seu lance**, **lance atual**, status (**Na liderança** / **Superado**), countdown compacto e link para a página do leilão.
+
+- Card **Superado**: borda vermelha com glow pulsante animado.
+- Card **Na liderança**: borda verde com glow pulsante animado.
+- Lance proxy ativo é indicado com badge "Proxy" ao lado do status.
+
+Estado vazio quando não há lances ativos: mensagem + link para explorar leilões.
+
+### Seção: Minha Loja
+
+Reservada para itens que o comprador colocou à venda como vendedor. Exibe botão **Anunciar** inline ao título, que redireciona para `/under-development` (a implementar). Estado vazio enquanto não há itens cadastrados.
+
+---
+
+## Meus Lances (`/bids`) — a implementar
 
 Lista todos os lances dados pelo usuário, dividida em duas abas: **Ativos** e **Encerrados**.
 
 ### Aba Ativos
 
-Exibe os leilões em que o usuário tem pelo menos um lance e que ainda estão com status `ATIVO`.
-
-| Campo exibido | Detalhe |
-|---|---|
-| Imagem do lote | Thumbnail do item |
-| Título do leilão | Link para `/auctions/:id` |
-| Seu lance | Valor do maior lance do usuário |
-| Lance atual | Maior lance global do leilão |
-| Status | **Na liderança** ou **Superado** |
-| Tempo restante | Countdown compacto |
-
-- Se o usuário estiver **superado**, o card é destacado visualmente (borda vermelha / label em destaque) para incentivar um novo lance.
-- Lance proxy ativo é indicado com um ícone ou label próprio.
+Mesmos cards do Dashboard, com link "Ver todos" apontando aqui.
 
 ### Aba Encerrados
 
-Exibe leilões encerrados em que o usuário participou, independentemente de ter vencido.
-
 | Campo exibido | Detalhe |
 |---|---|
-| Imagem do lote | Thumbnail |
+| Thumbnail | Imagem do lote |
 | Título | Link para `/auctions/:id` |
 | Seu maior lance | Valor máximo enviado |
 | Resultado | **Vencedor** ou **Não venceu** |
-| Data de encerramento | Formato dd/mm/aa |
+| Data de encerramento | Formato dd/mm/aaaa |
 
 ---
 
-## Leilões Acompanhados
+## Meus Pagamentos (`/payments`)
 
-O usuário pode salvar leilões de interesse sem precisar dar um lance. A ação de acompanhar é acionada por um botão na página do leilão (ex.: ícone de marcação / "Acompanhar").
+Lista os leilões vencidos pelo usuário com o status e os detalhes do pagamento acordado com o admin. Os dados são preenchidos manualmente pelo admin após o encerramento do leilão.
 
-Esta página exibe o mesmo card compacto de leilão da listagem pública, acrescido de:
-
-- Botão **Parar de acompanhar** em cada card
-- Indicação de leilões já encerrados (opacidade reduzida + label "Encerrado")
-
-Leilões encerrados permanecem na lista por **30 dias** e depois são removidos automaticamente.
-
-> Acompanhar não gera notificação por padrão nesta versão. Notificações são tratadas na seção própria.
-
----
-
-## Meus Pagamentos
-
-Lista os leilões vencidos pelo usuário com o status e os detalhes do pagamento acordado com o admin. Como o pagamento ocorre fora da plataforma, os dados são preenchidos manualmente pelo admin após o encerramento do leilão.
-
-Cada entrada na lista exibe um card expandido com:
+Cada card exibe:
 
 | Campo | Detalhe |
 |---|---|
-| Imagens do item | Galeria das fotos do lote (as mesmas do leilão) |
+| Thumbnail do item | 80×80px, link para `/auctions/:id` |
 | Título do leilão | Link para `/auctions/:id` |
-| Vendedor | Nome do vendedor verificado |
+| Vendedor | Nome do vendedor |
+| Data da compra | Data de encerramento do leilão |
 | Valor total | Lance vencedor |
 | Meio de pagamento | Ex.: PIX, boleto, cartão — preenchido pelo admin |
 | Parcelas | Número de parcelas acordado (1 = à vista) |
 | Parcelas pagas | Quantidade já quitada |
-| Valor por parcela | Calculado sobre o total |
-| Próximo pagamento | Data da próxima parcela (chip de data) |
+| Próximo pagamento | Data da próxima parcela |
 | Status geral | **Aguardando contato**, **Em andamento** ou **Concluído** |
+
+Barra de progresso de parcelas quando `installments > 1`.
 
 ### Status Geral
 
@@ -132,58 +103,72 @@ Cada entrada na lista exibe um card expandido com:
 
 O comprador vê os dados mas não pode alterá-los. Todos os campos são preenchidos e atualizados exclusivamente pelo admin.
 
+Estado vazio quando não há pagamentos.
+
+Header da página: eyebrow "Área do comprador" + link "Minha Conta →" + h1 "PAGAMENTOS".
+
 ---
 
-## Dados da Conta
+## Dados da Conta (`/account`)
 
-Permite ao usuário visualizar e editar suas informações básicas de perfil.
+Permite ao usuário visualizar e editar suas informações de perfil.
+
+Header da página: eyebrow "Área do comprador" + link "← Dashboard" + h1 "Minha Conta".
+
+### Perfil
+
+Exibe avatar com iniciais do nome, nome completo, badge "Verificado" (quando aplicável) e data de ingresso.
+
+### Estatísticas
+
+Linha com três métricas: **Leilões vencidos**, **Lances dados**, **Participando**.
+
+### Campos
 
 | Campo | Editável | Regra |
 |---|---|---|
-| Nome | Sim | Obrigatório |
-| E-mail | Não | Exibido apenas para referência; alteração exige fluxo próprio |
-| Senha | Sim | Fluxo separado: pede senha atual + nova senha + confirmação |
-| Foto de perfil | Não (MVP) | Reservado para versão futura |
+| Nome completo | Sim | Obrigatório; edição inline com botão Editar/Salvar/Cancelar |
+| E-mail | Não | Exibido apenas para referência |
+| Telefone | Não | Exibido apenas para referência |
+| CPF | Não | Exibido mascarado |
 
-### Exclusão de conta
+### Endereço de entrega
 
-Não disponível via interface do usuário nesta versão. Solicitações de exclusão devem ser feitas ao admin.
+Campos exibidos (somente leitura no MVP): CEP, logradouro + número, complemento, bairro, cidade/estado.
 
----
+### Alteração de senha
 
-## Notificações
+Seção expansível com botão "Alterar". Quando aberta, exibe formulário com:
 
-Nesta versão, notificações são exibidas **apenas in-app** (sem push ou e-mail). Um ícone de sino na Navbar indica notificações não lidas com um badge numérico.
-
-| Evento | Notificação gerada |
+| Campo | Validação |
 |---|---|
-| Usuário é superado em um lance | "Você foi superado em [Título]" |
-| Lance proxy esgotado | "Seu lance proxy atingiu o limite em [Título]" |
-| Leilão acompanhado encerra em 1h | "[Título] encerra em 1 hora" |
-| Usuário vence um leilão | "Você venceu [Título]! O admin entrará em contato." |
-| Admin atualiza status de pagamento | "Pagamento de [Título] atualizado para [status]" |
+| Senha atual | Obrigatório |
+| Nova senha | Obrigatório, mínimo 8 caracteres |
+| Confirmar nova senha | Deve coincidir com nova senha |
 
-Clicando em uma notificação, o usuário é redirecionado para a tela relevante. Notificações são marcadas como lidas ao clicar ou ao abrir a lista.
+Mensagens de erro exibidas inline. Sucesso exibe feedback positivo e fecha o formulário automaticamente após 2,5s.
+
+### Configurações
+
+Seletor de paleta de cores (tema padrão / tema alternativo).
 
 ---
 
 ## Critérios de Aceite
 
 - [ ] Rotas da área logada redirecionam para `/login` quando não há sessão ativa
-- [ ] Navbar exibe nome do usuário logado com dropdown para área e logout
-- [ ] Dashboard exibe seções "Participando" e "Acompanhando" com até 6 cards cada
-- [ ] Card "Superado" no Dashboard tem destaque visual diferenciado
-- [ ] Meus Lances exibe corretamente cards com status "Na liderança" e "Superado"
-- [ ] Card "Superado" tem destaque visual diferenciado
-- [ ] Lance proxy ativo é indicado no card
-- [ ] Leilões Acompanhados permitem remover item da lista
-- [ ] Leilões encerrados em Acompanhados são removidos após 30 dias
-- [ ] Meus Pagamentos exibe status, parcelas e dados do acordo preenchidos pelo admin
-- [ ] Próximo pagamento exibe chip de data correto
-- [ ] Admin atualiza status de pagamento sem que o comprador possa alterar
-- [ ] Dados da Conta permitem alterar nome e senha com validação
-- [ ] Notificações não lidas exibem badge numérico no sino da Navbar
-- [ ] Clicar em notificação redireciona para a tela correta e marca como lida
+- [ ] Navbar exibe chip com nome do usuário, clicável, levando a `/dashboard`
+- [ ] Dashboard exibe seções "Leilões" e "Minha Loja"
+- [ ] Card "Superado" tem borda vermelha com glow pulsante
+- [ ] Card "Na liderança" tem borda verde com glow pulsante
+- [ ] Lance proxy ativo é indicado com badge "Proxy" no card
+- [ ] Link "Ver todos" aparece em Leilões quando há 6 ou mais itens
+- [ ] Botão "Sair" no Dashboard redireciona para `/`
+- [ ] Meus Pagamentos exibe status, parcelas e dados do acordo
+- [ ] Data da compra exibida em cada card de pagamento
+- [ ] Dados da Conta permite alterar nome com validação inline
+- [ ] Alteração de senha valida campos e exibe feedback de sucesso
+- [ ] Seletor de tema funciona em Configurações
 
 ---
 
@@ -191,17 +176,19 @@ Clicando em uma notificação, o usuário é redirecionado para a tela relevante
 
 | Situação | Comportamento esperado |
 |---|---|
-| Usuário sem lances | "Meus Lances" exibe estado vazio com chamada para explorar leilões |
-| Usuário sem leilões acompanhados | "Acompanhando" exibe estado vazio com chamada para explorar |
-| Sessão expirada durante navegação | Redirect para `/login` com mensagem "Sua sessão expirou" |
+| Usuário sem lances ativos | Dashboard exibe estado vazio em "Leilões" com chamada para explorar leilões |
 | Usuário sem leilões vencidos | "Meus Pagamentos" exibe estado vazio |
-| Admin atualiza status enquanto usuário está na página | Status atualiza sem recarregar (WebSocket ou polling) |
+| Nome vazio ao salvar | Exibe erro "Nome é obrigatório." |
+| Senhas não coincidem | Exibe erro "As senhas não coincidem." |
+| Sessão expirada durante navegação | Redirect para `/login` |
 
 ---
 
 ## Fora do Escopo desta Spec
 
 - Fluxo de pagamento (tratado externamente via WhatsApp com o admin)
-- Área do vendedor (spec separada)
+- Área do vendedor / criação de leilão (spec separada)
 - Painel do admin
-- Notificações push / e-mail
+- Notificações (push, e-mail ou in-app)
+- Edição de endereço de entrega (MVP)
+- Upload de foto de perfil (MVP)

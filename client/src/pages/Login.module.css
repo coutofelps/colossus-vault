@@ -54,6 +54,18 @@
   color: var(--acid);
 }
 
+.successBanner {
+  background: #1C3A0D;
+  border: 1px solid #2E6114;
+  color: #7DC82A;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 2px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
 .heading {
   font-family: var(--font-display);
   font-size: 28px;
