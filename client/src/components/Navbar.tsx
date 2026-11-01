@@ -50,7 +50,7 @@ export default function Navbar() {
           </ul>
 
           <div className={styles.actions}>
-            <Link to="/under-development" className={styles.loginBtn}>Entrar</Link>
+            <Link to="/login" className={styles.loginBtn}>Entrar</Link>
             <button
               className={styles.hamburger}
               onClick={() => setMenuOpen(o => !o)}
