@@ -1,14 +1,14 @@
 <div align="center">
-  <img src="client/src/assets/purple-version-icon.png" width="140" alt="Colossus Vault" />
+  <img src="client/public/brand-identity/assets/green-version-icon.png" width="140" alt="Colossus Vault" />
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="client/src/assets/grey-version-icon.png" width="140" alt="Colossus Vault" />
+  <img src="client/public/brand-identity/assets/grey-version-icon.png" width="140" alt="Colossus Vault" />
 
   <h1>Colossus Vault</h1>
 
   <p><strong>A primeira plataforma de leilão premium para action figures e colecionáveis do Brasil.</strong></p>
 
   <p>
-    <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black" />
+    <img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black" />
     <img src="https://img.shields.io/badge/Vite-6-646CFF?style=flat-square&logo=vite&logoColor=white" />
     <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" />
     <img src="https://img.shields.io/badge/status-em%20desenvolvimento-8FD62F?style=flat-square" />
@@ -58,7 +58,7 @@ colossus-vault/
 
 | Tecnologia | Versão | Uso |
 |---|---|---|
-| React | 18 | UI |
+| React | 19 | UI |
 | Vite | 6 | Build e dev server |
 | TypeScript | 5 | Tipagem |
 | React Router DOM | 6 | Roteamento SPA |
@@ -95,6 +95,14 @@ Acesse em [`http://localhost:5173`](http://localhost:5173).
 | Rota | Descrição |
 |---|---|
 | `/` | Página inicial |
+| `/auctions` | Listagem de leilões |
+| `/auctions/:id` | Detalhe do leilão |
+| `/login` | Autenticação |
+| `/forgot-password` | Recuperação de senha |
+| `/reset-password` | Redefinição de senha |
+| `/dashboard` | Área do comprador |
+| `/payments` | Pagamentos |
+| `/account` | Dados da conta |
 | `/brand-identity` | Guia completo de identidade visual |
 
 ---
@@ -105,29 +113,39 @@ Acesse em [`http://localhost:5173`](http://localhost:5173).
 colossus-vault/
 ├── client/
 │   ├── public/
-│   │   ├── favicon.png              # Ícone da aplicação
-│   │   └── brand/
-│   │       └── index.html           # Brand identity document (servido como estático)
+│   │   ├── favicon.png
+│   │   └── brand-identity/
+│   │       ├── index.html           # Brand identity document (servido como estático)
+│   │       └── assets/              # Ícones do mascote (green, grey, purple)
 │   └── src/
 │       ├── assets/
-│       │   ├── purple-version-icon.png  # Mascote — versão colorida
-│       │   └── grey-version-icon.png    # Mascote — versão monocromática
-│       ├── pages/
-│       │   ├── Home.tsx             # /
-│       │   └── BrandIdentity.tsx    # /brand-identity
+│       │   └── grey-version-icon.png
+│       ├── components/              # Navbar, Footer, Button, Badge, Countdown…
+│       ├── context/                 # AuthContext, ThemeContext
+│       ├── pages/                   # Home, Auctions, AuctionDetail, Login,
+│       │                            # Dashboard, Payments, Account…
 │       ├── App.tsx                  # Rotas
-│       └── index.css                # Reset e fonte global
+│       └── index.css
 ├── docs/
 │   ├── brand-identity/
-│   │   ├── index.html               # Fonte da verdade — identidade visual completa
-│   │   └── tokens.md                # Design tokens (espelho para devs e IA)
+│   │   └── tokens.md                # Design tokens
 │   ├── product/
-│   │   ├── vision.md                # Visão, público e proposta de valor
+│   │   ├── vision.md                # Visão e proposta de valor
 │   │   ├── roadmap.md               # Fases do produto
 │   │   └── glossary.md              # Glossário do domínio
-│   ├── decisions/                   # ADRs — Architecture Decision Records
-│   └── specs/
-│       └── auction-flow.md          # Spec completa do fluxo de leilão
+│   ├── decisions/
+│   │   └── ADR-001-tech-stack.md    # Stack técnico inicial
+│   └── specs/                       # Specs de funcionalidades
+│       ├── home.md
+│       ├── auctions.md
+│       ├── auction-flow.md
+│       ├── login.md
+│       ├── forgot-password.md
+│       ├── reset-password.md
+│       ├── account-area.md
+│       ├── announce.md
+│       ├── store.md
+│       └── …
 └── CLAUDE.md                        # Instruções para agentes de IA
 ```
 
@@ -142,9 +160,15 @@ A documentação do projeto é orientada a IA — estruturada para que agentes c
 | [`docs/product/vision.md`](docs/product/vision.md) | Visão do produto, público-alvo e diferenciais |
 | [`docs/product/glossary.md`](docs/product/glossary.md) | Glossário: Leilão, Lance, Lote, Proxy, Anti-snipe… |
 | [`docs/product/roadmap.md`](docs/product/roadmap.md) | Fases de desenvolvimento |
-| [`docs/specs/auction-flow.md`](docs/specs/auction-flow.md) | Regras completas do leilão — estados, lances, encerramento, casos de borda |
+| [`docs/specs/auction-flow.md`](docs/specs/auction-flow.md) | Regras do leilão — estados, lances, encerramento, casos de borda |
+| [`docs/specs/home.md`](docs/specs/home.md) | Spec da página inicial |
+| [`docs/specs/auctions.md`](docs/specs/auctions.md) | Spec da listagem de leilões |
+| [`docs/specs/login.md`](docs/specs/login.md) | Spec do fluxo de autenticação |
+| [`docs/specs/account-area.md`](docs/specs/account-area.md) | Spec da área do comprador |
+| [`docs/specs/announce.md`](docs/specs/announce.md) | Spec do fluxo de anúncio (vendedor) |
+| [`docs/specs/store.md`](docs/specs/store.md) | Spec da Loja da Galera |
 | [`docs/brand-identity/tokens.md`](docs/brand-identity/tokens.md) | Design tokens — paleta, tipografia, espaçamento |
-| [`docs/decisions/ADR-001-tech-stack.md`](docs/decisions/ADR-001-tech-stack.md) | ADR-001 — Stack técnico inicial (React, Fastify, PostgreSQL) |
+| [`docs/decisions/ADR-001-tech-stack.md`](docs/decisions/ADR-001-tech-stack.md) | ADR-001 — Stack técnico inicial |
 | [`CLAUDE.md`](CLAUDE.md) | Ponto de entrada para agentes de IA |
 
 ---
@@ -175,8 +199,13 @@ O roadmap completo está em [`docs/product/roadmap.md`](docs/product/roadmap.md)
 | Fase | Foco | Status |
 |---|---|---|
 | **Fase 1 — Fundação** | MVP: leilões funcionais, lances, anti-snipe, encerramento automático | 🔨 Em andamento |
-| **Fase 2 — Consolidação** | Painel do vendedor, Compre Agora, busca, notificações, filas | 📋 Planejado |
+| **Fase 2 — Consolidação** | Painel do vendedor, Compre Agora, busca, notificações, Redis/BullMQ | 📋 Planejado |
 | **Fase 3 — Escala** | Histórico de preços, reputação, pagamento nativo, app mobile | 🔭 Futuro |
+
+**Fase 1 — Frontend concluído:**
+setup, design system, tokens CSS, componentes base (Button, Badge, Countdown, ImageGallery), Navbar responsiva com tema alternável, Footer, listagem de leilões, detalhe do leilão com galeria e lightbox, autenticação (Login / ForgotPassword / ResetPassword), área do comprador, pagamentos.
+
+**Fase 1 — Pendente:** backend Fastify + PostgreSQL, WebSocket, criação de leilão pelo vendedor, pipeline de CI.
 
 ---
 
