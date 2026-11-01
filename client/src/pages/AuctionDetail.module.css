@@ -356,6 +356,10 @@
   .bidRow { grid-template-columns: 1fr auto; }
   .bidTime { display: none; }
 
+  /* Empurra conteúdo e footer acima da barra fixa */
+  .main { padding-bottom: 90px; }
+  .page :global(footer) { padding-bottom: 80px; }
+
   /* Botão DAR LANCE fixo no fundo no mobile */
   .stickyBidBar {
     display: flex;
