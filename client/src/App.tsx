@@ -7,6 +7,8 @@ import Login from './pages/Login'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import UnderDevelopment from './pages/UnderDevelopment'
+import AccountLayout from './pages/account/AccountLayout'
+import AccountDashboard from './pages/account/AccountDashboard'
 import ThemePanel from './components/ThemePanel'
 
 function App() {
@@ -22,6 +24,13 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/under-development" element={<UnderDevelopment />} />
+        <Route path="/account" element={<AccountLayout />}>
+          <Route index element={<AccountDashboard />} />
+          <Route path="bids" element={<UnderDevelopment />} />
+          <Route path="watchlist" element={<UnderDevelopment />} />
+          <Route path="payments" element={<UnderDevelopment />} />
+          <Route path="profile" element={<UnderDevelopment />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
