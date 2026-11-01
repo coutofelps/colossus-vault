@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Countdown from '../components/Countdown'
@@ -59,6 +60,7 @@ function BidCard({ item }: { item: BidEntry }) {
 export default function Dashboard() {
   usePageTitle('Dashboard')
   const navigate = useNavigate()
+  const { logout } = useAuth()
 
   const empty = mockActiveBids.length === 0
 
@@ -71,7 +73,7 @@ export default function Dashboard() {
             <div className={styles.headerTop}>
               <p className={styles.eyebrow}>Área do comprador</p>
               <div className={styles.headerActions}>
-                <button className={styles.logoutBtn} onClick={() => navigate('/')}>Sair</button>
+                <button className={styles.logoutBtn} onClick={() => { logout(); navigate('/') }}>Sair</button>
                 <Link to="/account" className={styles.accountLink}>Minha Conta →</Link>
               </div>
             </div>

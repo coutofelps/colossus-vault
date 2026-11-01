@@ -5,11 +5,13 @@ import Footer from '../components/Footer'
 import Button from '../components/Button'
 import usePageTitle from '../hooks/usePageTitle'
 import { useTheme } from '../context/ThemeContext'
+import { useAuth } from '../context/AuthContext'
 import styles from './Login.module.css'
 
 export default function Login() {
   usePageTitle('Entrar')
   const navigate = useNavigate()
+  const { login } = useAuth()
   const { theme } = useTheme()
   const icon = theme === 'alt'
     ? '/brand-identity/assets/grey-version-icon.png'
@@ -43,6 +45,7 @@ export default function Login() {
       if (remember) localStorage.setItem('cv_remember_email', email)
       else localStorage.removeItem('cv_remember_email')
     } catch { /* ignore */ }
+    login(email)
     navigate('/dashboard')
   }
 

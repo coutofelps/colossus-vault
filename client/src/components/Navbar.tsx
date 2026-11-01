@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { useTheme } from '../context/ThemeContext'
-import { mockUser } from '../data/mockAccount'
+import { useAuth } from '../context/AuthContext'
 import styles from './Navbar.module.css'
 
-// Mock: troque para false para ver o estado deslogado
-const MOCK_LOGGED_IN = true
-
 export default function Navbar() {
-  const { theme, toggle } = useTheme()
+  const { theme } = useTheme()
+  const { isLoggedIn, user, logout } = useAuth()
   const { pathname } = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -28,7 +26,7 @@ export default function Navbar() {
   }, [menuOpen])
 
   const navigate = useNavigate()
-  const firstName = mockUser.name.split(' ')[0]
+  const firstName = user?.name.split(' ')[0] ?? ''
 
   return (
     <>
@@ -52,7 +50,7 @@ export default function Navbar() {
                 Loja da Galera
               </NavLink>
             </li>
-            {MOCK_LOGGED_IN && (
+            {isLoggedIn && (
               <>
                 <li>
                   <NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.active : ''}>
@@ -69,7 +67,7 @@ export default function Navbar() {
           </ul>
 
           <div className={styles.actions}>
-            {MOCK_LOGGED_IN ? (
+            {isLoggedIn ? (
               <NavLink to="/dashboard" className={styles.userChip}>{firstName}</NavLink>
             ) : (
               <Link to="/login" className={styles.loginBtn}>Entrar</Link>
@@ -106,7 +104,7 @@ export default function Navbar() {
           Loja da Galera
         </NavLink>
 
-        {MOCK_LOGGED_IN && (
+        {isLoggedIn && (
           <>
             <div className={styles.mobileDivider} />
             <NavLink to="/dashboard" className={({ isActive }) => `${styles.mobileLink} ${isActive ? styles.mobileLinkActive : ''}`}>
@@ -121,7 +119,7 @@ export default function Navbar() {
               Dados da Conta
             </NavLink>
             <div className={styles.mobileDivider} />
-            <button className={styles.mobileLogoutBtn} onClick={() => navigate('/')}>Sair</button>
+            <button className={styles.mobileLogoutBtn} onClick={() => { logout(); navigate('/') }}>Sair</button>
           </>
         )}
 
