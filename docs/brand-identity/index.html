@@ -1612,6 +1612,69 @@ section:last-child { border-bottom: none; }
 .lt-name { font-size: 11px; font-weight: 600; color: #2A4A1C; }
 .lt-hex { font-size: 11px; font-weight: 300; color: #5A6B52; }
 
+/* ─── MOBILE FIXES (≤ 480px) ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  /* ── Espaçamento global ──────────────────────────────────────────────────── */
+  /* Sections: reduz padding-block de 80px para 48px */
+  section { padding-block: 48px; }
+
+  /* ── Hero ────────────────────────────────────────────────────────────────── */
+  /* Remove altura mínima de 100svh — conteúdo começa no topo sem espaço vazio */
+  .hero { min-height: auto; padding-block: 32px; }
+  /* Título numa só linha: COLOSSUS VAULT */
+  .hero h1 { font-size: clamp(36px, 9vw, 160px); white-space: nowrap; }
+  .hero h1 .hollow-line,
+  .hero h1 .green-line { display: inline; }
+  /* Compacta espaçamentos internos do hero */
+  .hero-tag { margin-bottom: 16px; }
+  .hero-sub { margin-top: 16px; }
+  .hero-meta { margin-top: 20px; gap: 24px; }
+
+  /* ── Paleta de cores ─────────────────────────────────────────────────────── */
+  /* Reduz padding do bloco de amostra de cor */
+  .color-swatch { padding: 32px 20px; min-height: 80px; }
+
+  /* ── Logo showcase ───────────────────────────────────────────────────────── */
+  /* Reduz padding dos blocos de logo (classe + inline style via !important) */
+  .logo-showcase { padding: 32px 20px !important; }
+
+  /* ── Tipografia ──────────────────────────────────────────────────────────── */
+  .type-row { padding: 24px 20px; }
+  .t-display { font-size: clamp(36px, 8vw, 96px); }
+  .type-sample { overflow: hidden; }
+
+  /* ── Web mockup ──────────────────────────────────────────────────────────── */
+  .mockup-nav { padding: 0 16px; gap: 12px; }
+  .mockup-nav-links { display: none; }
+  .mockup-hero { padding: 28px 20px; }
+
+  /* ── App tabs ────────────────────────────────────────────────────────────── */
+  .app-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .app-tab { white-space: nowrap; flex-shrink: 0; }
+
+  /* ── Email mockup ────────────────────────────────────────────────────────── */
+  .email-header { padding: 20px 20px; }
+  .email-body { padding: 24px 20px; }
+
+  /* ── Inspiração ──────────────────────────────────────────────────────────── */
+  .inspo-layout { grid-template-columns: 1fr; gap: 32px; }
+  .inspo-cover-wrap { max-width: 100%; overflow: hidden; }
+
+  /* ── Demos de variante ───────────────────────────────────────────────────── */
+  .dark-demo { overflow: hidden; padding: 20px; }
+  .light-demo { padding: 20px; }
+
+  /* ── Footer ──────────────────────────────────────────────────────────────── */
+  /* Remove padding inferior do body e compacta o footer */
+  body { padding-bottom: 0; }
+  .footer {
+    padding-block: 28px 20px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
