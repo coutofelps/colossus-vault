@@ -6,7 +6,7 @@ Plataforma de leilão de action figures e colecionáveis.
 
 | Caminho | Finalidade |
 |---|---|
-| `docs/brand-identity/index.html` | Documento completo de identidade visual (fonte da verdade) |
+| `client/public/brand-identity/index.html` | Documento completo de identidade visual (fonte da verdade) |
 | `docs/brand-identity/tokens.md` | Espelho dos design tokens — leia antes de construir qualquer componente de UI |
 | `docs/product/vision.md` | Visão do produto e público-alvo |
 | `docs/product/glossary.md` | Termos do domínio (Leilão, Lance, Lote, Lance Proxy…) |
