@@ -1620,12 +1620,15 @@ section:last-child { border-bottom: none; }
 
   /* ── Hero ────────────────────────────────────────────────────────────────── */
   /* Remove altura mínima de 100svh — conteúdo começa no topo sem espaço vazio */
-  .hero { min-height: auto; padding-block: 56px; }
-  .hero h1 { font-size: clamp(44px, 12vw, 160px); }
+  .hero { min-height: auto; padding-block: 32px; }
+  /* Título numa só linha: COLOSSUS VAULT */
+  .hero h1 { font-size: clamp(36px, 9vw, 160px); white-space: nowrap; }
+  .hero h1 .hollow-line,
+  .hero h1 .green-line { display: inline; }
   /* Compacta espaçamentos internos do hero */
-  .hero-tag { margin-bottom: 24px; }
-  .hero-sub { margin-top: 20px; }
-  .hero-meta { margin-top: 28px; gap: 28px; }
+  .hero-tag { margin-bottom: 16px; }
+  .hero-sub { margin-top: 16px; }
+  .hero-meta { margin-top: 20px; gap: 24px; }
 
   /* ── Paleta de cores ─────────────────────────────────────────────────────── */
   /* Reduz padding do bloco de amostra de cor */
