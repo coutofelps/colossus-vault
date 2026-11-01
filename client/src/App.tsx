@@ -9,6 +9,7 @@ import ResetPassword from './pages/ResetPassword'
 import UnderDevelopment from './pages/UnderDevelopment'
 import AccountLayout from './pages/account/AccountLayout'
 import AccountDashboard from './pages/account/AccountDashboard'
+import AccountWip from './pages/account/AccountWip'
 import ThemePanel from './components/ThemePanel'
 
 function App() {
@@ -26,10 +27,10 @@ function App() {
         <Route path="/under-development" element={<UnderDevelopment />} />
         <Route path="/account" element={<AccountLayout />}>
           <Route index element={<AccountDashboard />} />
-          <Route path="bids" element={<UnderDevelopment />} />
-          <Route path="watchlist" element={<UnderDevelopment />} />
-          <Route path="payments" element={<UnderDevelopment />} />
-          <Route path="profile" element={<UnderDevelopment />} />
+          <Route path="bids" element={<AccountWip title="Meus Lances" />} />
+          <Route path="watchlist" element={<AccountWip title="Acompanhando" />} />
+          <Route path="payments" element={<AccountWip title="Pagamentos" />} />
+          <Route path="profile" element={<AccountWip title="Dados da Conta" />} />
         </Route>
       </Routes>
     </BrowserRouter>
