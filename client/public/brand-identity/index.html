@@ -1612,6 +1612,33 @@ section:last-child { border-bottom: none; }
 .lt-name { font-size: 11px; font-weight: 600; color: #2A4A1C; }
 .lt-hex { font-size: 11px; font-weight: 300; color: #5A6B52; }
 
+/* ─── MOBILE FIXES (≤ 480px) ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  /* Hero: reduz clamp floor do h1 para evitar overflow */
+  .hero h1 { font-size: clamp(44px, 12vw, 160px); }
+
+  /* Tipografia: reduz padding lateral das rows e clamp floor do display */
+  .type-row { padding: 28px 20px; }
+  .t-display { font-size: clamp(36px, 8vw, 96px); }
+
+  /* Web mockup: reduz padding do nav e esconde links de navegação */
+  .mockup-nav { padding: 0 16px; gap: 12px; }
+  .mockup-nav-links { display: none; }
+
+  /* App tabs: permite scroll horizontal em vez de overflow */
+  .app-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .app-tab { white-space: nowrap; flex-shrink: 0; }
+
+  /* Inspiração: força coluna única já no 480px (antes do 720px existente) */
+  .inspo-layout { grid-template-columns: 1fr; gap: 32px; }
+  /* Contém o glow absoluto com inset:-20px que extrapola o container */
+  .inspo-cover-wrap { max-width: 100%; overflow: hidden; }
+
+  /* Clipa amostras de tipografia e demos de logo que transbordam levemente */
+  .type-sample { overflow: hidden; }
+  .dark-demo { overflow: hidden; }
+}
+
 </style>
 
 <!-- ═══════════════════════════════════════════════════════════════════════════
