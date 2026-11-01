@@ -66,6 +66,12 @@ O checkbox não afeta o tempo de sessão — apenas persiste o e-mail para conve
 
 ---
 
+## Autenticação
+
+No MVP, a autenticação é simulada no cliente via **AuthContext**. Qualquer e-mail e senha que passem na validação de formato são aceitos. O submit chama `login(email)`, que persiste a sessão em `localStorage` (`cv_auth_user`) e deriva o nome de exibição do prefixo do e-mail. Quando a API real existir, `login()` será substituída pela chamada ao backend — o restante do fluxo permanece igual.
+
+---
+
 ## Links e Ações
 
 | Elemento | Destino |
@@ -86,7 +92,7 @@ Não há link para cadastro — o registro é feito pelo admin.
 - [ ] E-mail com formato inválido impede o submit e exibe mensagem de erro
 - [ ] Senha vazia impede o submit e exibe mensagem de erro
 - [ ] Erros exibidos inline abaixo de cada campo com borda vermelha no input
-- [ ] Submit sem erros limpa as mensagens, autentica e redireciona para `/dashboard`
+- [ ] Submit sem erros limpa as mensagens, chama `login(email)` no AuthContext e redireciona para `/dashboard`
 - [ ] Checkbox "Lembrar-me" salva o e-mail em `localStorage` ao submeter com sucesso
 - [ ] Na próxima visita, campo e-mail é pré-preenchido e checkbox aparece marcado
 - [ ] Desmarcar e submeter apaga o e-mail salvo

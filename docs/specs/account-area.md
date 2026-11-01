@@ -154,9 +154,17 @@ Seletor de paleta de cores (tema padrão / tema alternativo).
 
 ---
 
+## Autenticação
+
+A sessão é gerenciada pelo **AuthContext** e persistida em `localStorage` (`cv_auth_user`). O estado de autenticação é lido por todos os componentes via `useAuth()`.
+
+> **Pendente:** guarda de rota não implementada. Acessar `/dashboard`, `/payments` ou `/account` diretamente pela URL funciona mesmo sem sessão ativa. Quando o backend existir, adicionar um `<PrivateRoute>` que redireciona para `/login`.
+
+---
+
 ## Critérios de Aceite
 
-- [ ] Rotas da área logada redirecionam para `/login` quando não há sessão ativa
+- [ ] Rotas da área logada redirecionam para `/login` quando não há sessão ativa *(pendente: guarda de rota)*
 - [ ] Navbar exibe chip com nome do usuário, clicável, levando a `/dashboard`
 - [ ] Dashboard exibe seções "Leilões" e "Minha Loja"
 - [ ] Card "Superado" tem borda vermelha com glow pulsante
