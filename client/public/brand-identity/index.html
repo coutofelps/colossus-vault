@@ -1614,29 +1614,52 @@ section:last-child { border-bottom: none; }
 
 /* ─── MOBILE FIXES (≤ 480px) ────────────────────────────────────────────── */
 @media (max-width: 480px) {
-  /* Hero: reduz clamp floor do h1 para evitar overflow */
+  /* ── Espaçamento global ──────────────────────────────────────────────────── */
+  /* Sections: reduz padding-block de 80px para 48px */
+  section { padding-block: 48px; }
+
+  /* ── Hero ────────────────────────────────────────────────────────────────── */
+  /* Remove altura mínima de 100svh — conteúdo começa no topo sem espaço vazio */
+  .hero { min-height: auto; padding-block: 56px; }
   .hero h1 { font-size: clamp(44px, 12vw, 160px); }
+  /* Compacta espaçamentos internos do hero */
+  .hero-tag { margin-bottom: 24px; }
+  .hero-sub { margin-top: 20px; }
+  .hero-meta { margin-top: 28px; gap: 28px; }
 
-  /* Tipografia: reduz padding lateral das rows e clamp floor do display */
-  .type-row { padding: 28px 20px; }
+  /* ── Paleta de cores ─────────────────────────────────────────────────────── */
+  /* Reduz padding do bloco de amostra de cor */
+  .color-swatch { padding: 32px 20px; min-height: 80px; }
+
+  /* ── Logo showcase ───────────────────────────────────────────────────────── */
+  /* Reduz padding dos blocos de logo (classe + inline style via !important) */
+  .logo-showcase { padding: 32px 20px !important; }
+
+  /* ── Tipografia ──────────────────────────────────────────────────────────── */
+  .type-row { padding: 24px 20px; }
   .t-display { font-size: clamp(36px, 8vw, 96px); }
+  .type-sample { overflow: hidden; }
 
-  /* Web mockup: reduz padding do nav e esconde links de navegação */
+  /* ── Web mockup ──────────────────────────────────────────────────────────── */
   .mockup-nav { padding: 0 16px; gap: 12px; }
   .mockup-nav-links { display: none; }
+  .mockup-hero { padding: 28px 20px; }
 
-  /* App tabs: permite scroll horizontal em vez de overflow */
+  /* ── App tabs ────────────────────────────────────────────────────────────── */
   .app-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .app-tab { white-space: nowrap; flex-shrink: 0; }
 
-  /* Inspiração: força coluna única já no 480px (antes do 720px existente) */
+  /* ── Email mockup ────────────────────────────────────────────────────────── */
+  .email-header { padding: 20px 20px; }
+  .email-body { padding: 24px 20px; }
+
+  /* ── Inspiração ──────────────────────────────────────────────────────────── */
   .inspo-layout { grid-template-columns: 1fr; gap: 32px; }
-  /* Contém o glow absoluto com inset:-20px que extrapola o container */
   .inspo-cover-wrap { max-width: 100%; overflow: hidden; }
 
-  /* Clipa amostras de tipografia e demos de logo que transbordam levemente */
-  .type-sample { overflow: hidden; }
-  .dark-demo { overflow: hidden; }
+  /* ── Demos de variante ───────────────────────────────────────────────────── */
+  .dark-demo { overflow: hidden; padding: 20px; }
+  .light-demo { padding: 20px; }
 }
 
 </style>
