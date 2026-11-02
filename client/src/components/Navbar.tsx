@@ -27,6 +27,7 @@ export default function Navbar() {
 
   const navigate = useNavigate()
   const firstName = user?.name.split(' ')[0] ?? ''
+  const isAuctionDetail = /^\/auctions\/[^/]+$/.test(pathname)
 
   return (
     <>
@@ -67,6 +68,15 @@ export default function Navbar() {
           </ul>
 
           <div className={styles.actions}>
+            {isAuctionDetail && (
+              <button
+                type="button"
+                className={styles.simulateBtn}
+                onClick={() => window.dispatchEvent(new CustomEvent('cv:simulate-win'))}
+              >
+                Simular vitória
+              </button>
+            )}
             {isLoggedIn ? (
               <NavLink to="/dashboard" className={styles.userChip}>{firstName}</NavLink>
             ) : (

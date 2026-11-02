@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Navbar from '../components/Navbar'
@@ -49,6 +49,12 @@ export default function AuctionDetail() {
     setEnded(true)
     if (isWinner) setShowEndAnimation(true)
   }, [isWinner])
+
+  useEffect(() => {
+    const handler = () => setShowEndAnimation(true)
+    window.addEventListener('cv:simulate-win', handler)
+    return () => window.removeEventListener('cv:simulate-win', handler)
+  }, [])
   const isActive = auction.status === 'active' && !ended
 
   const [proxyEnabled, setProxyEnabled] = useState(false)
@@ -171,15 +177,6 @@ export default function AuctionDetail() {
                   {isActive ? 'Dar Lance' : 'Ver resultado'}
                 </Button>
 
-                {isActive && (
-                  <button
-                    type="button"
-                    className={styles.simulateBtn}
-                    onClick={() => setShowEndAnimation(true)}
-                  >
-                    Simular vitória
-                  </button>
-                )}
               </div>
             </div>
           </div>

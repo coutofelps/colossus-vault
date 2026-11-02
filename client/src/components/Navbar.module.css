@@ -85,6 +85,23 @@
   margin-left: 0;
 }
 
+.simulateBtn {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #1a1200;
+  background: #FFD600;
+  border: none;
+  border-radius: 2px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.simulateBtn:hover { opacity: 0.85; }
+
 .loginBtn {
   font-family: var(--font-display);
   font-size: 13px;
