@@ -10,7 +10,7 @@ interface Props {
   onClose: () => void
 }
 
-const CONFETTI_COLORS = ['#8FD62F', '#FFFFE8', '#6B3FA0', '#9D5FD6', '#3A8C1C']
+const CONFETTI_COLORS = ['#FFD600', '#FFF0A0', '#6B3FA0', '#9D5FD6', '#FFA500']
 
 function playVictorySound() {
   try {
