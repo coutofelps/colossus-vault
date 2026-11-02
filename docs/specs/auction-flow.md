@@ -99,13 +99,16 @@ Quando o cronômetro zera, um overlay de tela toda é exibido sobre a página do
 | Elemento | Detalhe |
 |---|---|
 | Fundo | `--abyss` com opacidade 92% sobreposto à página do leilão |
+| Borda da tela | `box-shadow inset` 3px dourado (`#FFD600`) pulsante nas bordas da viewport — 1.6s ease-in-out infinito, inicia após 0.4s |
 | Entrada do card | Spring bounce — `cubic-bezier(0.34, 1.56, 0.64, 1)`, escala 0.85 → 1 |
-| Confetti | Partículas caindo nas cores da paleta: `--acid`, `--scar`, `--purple-vein`, `--purple-glow`, `--hulk-green` |
-| Eyebrow | "Leilão encerrado" — DM Sans, 11px, 600, `letter-spacing: 0.18em`, uppercase, `--acid` |
-| Troféu | Ícone centralizado com anel pulsante em `--acid` (`box-shadow` animado, 2s ease-in-out infinito) |
+| Confetti | 210 partículas caindo em ouro (`#FFD600`), âmbar (`#FFF0A0`), laranja (`#FFA500`) e lilás (`#6B3FA0`, `#9D5FD6`) |
+| Eyebrow | "Leilão encerrado" — DM Sans, 11px, 600, `letter-spacing: 0.18em`, uppercase, `#FFD600` |
+| Troféu | Ícone centralizado com anel pulsante em `#FFD600` (`box-shadow` animado, 2s ease-in-out infinito) |
 | Heading | "VENCEDOR!" — Barlow Condensed, 900, uppercase, `--scar` |
 | Item | Nome do item + vendedor — DM Sans, 14px, `--fog` |
-| Lance vencedor | Chip com borda `--border-mid`, label "Lance vencedor" em `--grave`, valor em Barlow Condensed 800, `--acid` |
+| Lance vencedor | Chip com fundo e borda dourados (opacidade baixa), label em `--grave`, valor em Barlow Condensed 900, `#FFD600` |
+| Nome do vencedor | Revelado letra a letra com stagger de 70ms — cada caractere sobe de baixo com flash dourado antes de pousar |
+| Som | Trompete sintético (sawtooth + filtro lowpass, 4 notas ascendentes) via Web Audio API ao abrir o overlay |
 | CTAs | Dois botões (ver abaixo) |
 
 ### CTAs por Perfil de Usuário
@@ -128,12 +131,16 @@ Quando o cronômetro zera, um overlay de tela toda é exibido sobre a página do
 
 - [ ] Overlay é exibido apenas para o usuário logado que é o vencedor do leilão
 - [ ] Usuários não vencedores e visitantes não veem o overlay
+- [ ] Borda dourada pulsante aparece nas extremidades da viewport ao abrir o overlay
 - [ ] Card entra com animação spring bounce
-- [ ] Confetti cai com as cores da paleta do projeto
-- [ ] Troféu exibe pulse animado em `--acid`
+- [ ] Confetti cai em paleta dourada/âmbar/lilás (210 partículas)
+- [ ] Troféu exibe pulse animado em `#FFD600`
+- [ ] Nome do vencedor é revelado letra a letra com stagger
+- [ ] Som de trompete sintético toca ao abrir o overlay
 - [ ] CTA primário leva o vencedor para `/payments`
 - [ ] Botão "Fechar" descarta o overlay
 - [ ] Overlay fecha automaticamente após 8 segundos
+- [ ] Todas as animações visuais respeitam `prefers-reduced-motion`
 
 ### Caso sem lances
 
