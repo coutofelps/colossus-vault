@@ -15,21 +15,28 @@ const CONFETTI_COLORS = ['#FFD600', '#FFF0A0', '#6B3FA0', '#9D5FD6', '#FFA500']
 function playVictorySound() {
   try {
     const ctx = new AudioContext()
-    // Fanfarra ascendente: C5 E5 G5 C6
-    const notes = [523.25, 659.25, 783.99, 1046.5]
+    // Trompete sintético: sawtooth + filtro lowpass modelando timbre de metal
+    const notes = [392, 523.25, 659.25, 783.99]
     notes.forEach((freq, i) => {
       const osc = ctx.createOscillator()
+      const filter = ctx.createBiquadFilter()
       const gain = ctx.createGain()
-      osc.connect(gain)
+      osc.connect(filter)
+      filter.connect(gain)
       gain.connect(ctx.destination)
-      osc.type = 'sine'
+      osc.type = 'sawtooth'
       osc.frequency.value = freq
-      const t = ctx.currentTime + i * 0.13
+      filter.type = 'lowpass'
+      filter.frequency.setValueAtTime(800, ctx.currentTime)
+      filter.frequency.linearRampToValueAtTime(3000, ctx.currentTime + 0.08)
+      filter.Q.value = 3
+      const t = ctx.currentTime + i * 0.16
       gain.gain.setValueAtTime(0, t)
-      gain.gain.linearRampToValueAtTime(0.28, t + 0.02)
-      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.38)
+      gain.gain.linearRampToValueAtTime(0.12, t + 0.04)
+      gain.gain.setValueAtTime(0.12, t + 0.22)
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.55)
       osc.start(t)
-      osc.stop(t + 0.38)
+      osc.stop(t + 0.6)
     })
   } catch { /* AudioContext bloqueado — ignora silenciosamente */ }
 }
