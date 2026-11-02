@@ -72,7 +72,7 @@ export default function WinnerOverlay({ auction, isWinner = false, onClose }: Pr
 
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
-    particlesRef.current = spawnParticles(70, canvas.width)
+    particlesRef.current = spawnParticles(210, canvas.width)
 
     const ctx = canvas.getContext('2d')
     if (!ctx) return
