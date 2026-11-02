@@ -1,11 +1,13 @@
 import { useState, useCallback, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Badge from '../components/Badge'
 import Countdown from '../components/Countdown'
 import Button from '../components/Button'
 import ImageGallery from '../components/ImageGallery'
+import WinnerOverlay from '../components/WinnerOverlay'
 import usePageTitle from '../hooks/usePageTitle'
 import { MOCK_AUCTIONS, getImages, fmt } from '../data/auctions'
 import styles from './AuctionDetail.module.css'
@@ -38,12 +40,15 @@ export default function AuctionDetail() {
   }
 
   const images = getImages(auction)
+  const { user } = useAuth()
   const [ended, setEnded] = useState(false)
   const [showEndAnimation, setShowEndAnimation] = useState(false)
+  const winner = auction.bids[0]
+  const isWinner = !!user && !!winner && user.name === winner.user
   const handleCountdownEnd = useCallback(() => {
     setEnded(true)
-    setShowEndAnimation(true)
-  }, [])
+    if (isWinner) setShowEndAnimation(true)
+  }, [isWinner])
   const isActive = auction.status === 'active' && !ended
 
   const [proxyEnabled, setProxyEnabled] = useState(false)
@@ -83,6 +88,15 @@ export default function AuctionDetail() {
                   <span className={styles.antiSnipe}>
                     Anti-snipe {auction.antiSnipe}min
                   </span>
+                )}
+                {isActive && (
+                  <button
+                    type="button"
+                    className={styles.simulateBtn}
+                    onClick={() => setShowEndAnimation(true)}
+                  >
+                    Simular vitória
+                  </button>
                 )}
               </div>
 
@@ -206,26 +220,12 @@ export default function AuctionDetail() {
         </div>
       </main>
 
-      {/* Animação de encerramento */}
       {showEndAnimation && (
-        <div className={styles.endOverlay} onClick={() => setShowEndAnimation(false)}>
-          <div className={styles.endCard}>
-            <div className={styles.endHammer}>🔨</div>
-            <h2 className={styles.endTitle}>Leilão encerrado!</h2>
-            {auction.bids.length > 0 ? (
-              <>
-                <p className={styles.endSub}>Vencedor</p>
-                <p className={styles.endWinner}>{auction.bids[0].user}</p>
-                <p className={styles.endAmount}>{fmt(auction.bids[0].value)}</p>
-              </>
-            ) : (
-              <p className={styles.endSub}>Nenhum lance registrado.</p>
-            )}
-            <button className={styles.endClose} onClick={() => setShowEndAnimation(false)}>
-              Fechar
-            </button>
-          </div>
-        </div>
+        <WinnerOverlay
+          auction={auction}
+          isWinner
+          onClose={() => setShowEndAnimation(false)}
+        />
       )}
 
       <Footer />

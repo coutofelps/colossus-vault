@@ -81,10 +81,59 @@ Após submissão, o leilão entra em `EM REVISÃO`. O cronômetro só inicia ap�
 Quando o cronômetro zera:
 
 1. O sistema marca o leilão como `ENCERRADO`.
-2. Uma **animação de encerramento** é exibida na tela do leilão para todos os usuários presentes.
+2. Uma **animação de encerramento** é exibida na tela do leilão para todos os usuários presentes (ver seção abaixo).
 3. O sistema **notifica o vencedor e o vendedor** (in-app e/ou e-mail — canal a definir).
 4. Uma **ordem é gerada automaticamente** com: item, valor final, dados do vencedor e do vendedor.
 5. O pagamento é tratado **fora do sistema**, diretamente entre o admin da plataforma e o comprador via WhatsApp.
+
+---
+
+## Overlay de Vencedor
+
+### Visão Geral
+
+Quando o cronômetro zera, um overlay de tela toda é exibido sobre a página do leilão para todos os usuários presentes. O disparo vem do servidor via WebSocket — não depende do cliente para garantir consistência.
+
+### Estrutura Visual
+
+| Elemento | Detalhe |
+|---|---|
+| Fundo | `--abyss` com opacidade 92% sobreposto à página do leilão |
+| Entrada do card | Spring bounce — `cubic-bezier(0.34, 1.56, 0.64, 1)`, escala 0.85 → 1 |
+| Confetti | Partículas caindo nas cores da paleta: `--acid`, `--scar`, `--purple-vein`, `--purple-glow`, `--hulk-green` |
+| Eyebrow | "Leilão encerrado" — DM Sans, 11px, 600, `letter-spacing: 0.18em`, uppercase, `--acid` |
+| Troféu | Ícone centralizado com anel pulsante em `--acid` (`box-shadow` animado, 2s ease-in-out infinito) |
+| Heading | "VENCEDOR!" — Barlow Condensed, 900, uppercase, `--scar` |
+| Item | Nome do item + vendedor — DM Sans, 14px, `--fog` |
+| Lance vencedor | Chip com borda `--border-mid`, label "Lance vencedor" em `--grave`, valor em Barlow Condensed 800, `--acid` |
+| CTAs | Dois botões (ver abaixo) |
+
+### CTAs por Perfil de Usuário
+
+| Perfil | CTA primário | CTA secundário |
+|---|---|---|
+| Vencedor | "Ver pagamentos" → `/payments` | "Fechar" |
+| Demais compradores | "Explorar leilões" → `/auctions` | "Fechar" |
+| Visitante não logado | "Explorar leilões" → `/auctions` | "Fechar" |
+
+### Comportamento
+
+- O overlay é disparado quando o cronômetro zera **e o usuário logado é o vencedor do leilão**.
+- Usuários não vencedores e visitantes não logados não veem o overlay — a página apenas transita para o estado `ENCERRADO` normalmente.
+- Pode ser fechado manualmente pelo botão "Fechar".
+- Auto-fechamento após **8 segundos** caso o usuário não interaja.
+- Após fechar, a página do leilão exibe o estado `ENCERRADO` normalmente (badge, cronômetro zerado, histórico de lances).
+
+### Critérios de Aceite
+
+- [ ] Overlay é exibido apenas para o usuário logado que é o vencedor do leilão
+- [ ] Usuários não vencedores e visitantes não veem o overlay
+- [ ] Card entra com animação spring bounce
+- [ ] Confetti cai com as cores da paleta do projeto
+- [ ] Troféu exibe pulse animado em `--acid`
+- [ ] CTA primário leva o vencedor para `/payments`
+- [ ] Botão "Fechar" descarta o overlay
+- [ ] Overlay fecha automaticamente após 8 segundos
 
 ### Caso sem lances
 
