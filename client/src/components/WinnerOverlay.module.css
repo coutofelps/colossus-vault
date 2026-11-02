@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   z-index: 200;
-  animation: fadeIn 0.35s ease forwards;
+  animation: fadeIn 0.35s ease forwards, borderPulse 1.6s ease-in-out 0.4s infinite;
 }
 
 .canvas {
@@ -18,6 +18,16 @@
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+@keyframes borderPulse {
+  0%, 100% { box-shadow: inset 0 0 0 3px rgba(143, 214, 47, 0.55), inset 0 0 50px rgba(143, 214, 47, 0.08); }
+  50%       { box-shadow: inset 0 0 0 4px rgba(143, 214, 47, 1),    inset 0 0 80px rgba(143, 214, 47, 0.22); }
+}
+
+@keyframes letterReveal {
+  from { opacity: 0; transform: translateY(10px) scale(0.85); color: var(--acid); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    color: var(--bone); }
 }
 
 @keyframes springIn {
@@ -74,6 +84,7 @@
   .trophyRing { animation: none; }
   .card { animation: none; }
   .overlay { animation: none; }
+  .winnerChar { animation: none; opacity: 1; }
 }
 
 .heading {
@@ -135,6 +146,12 @@
   font-weight: 500;
   color: var(--bone);
   margin: 0;
+}
+
+.winnerChar {
+  display: inline-block;
+  opacity: 0;
+  animation: letterReveal 0.35s ease forwards;
 }
 
 .noBids {

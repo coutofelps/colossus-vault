@@ -12,6 +12,28 @@ interface Props {
 
 const CONFETTI_COLORS = ['#8FD62F', '#FFFFE8', '#6B3FA0', '#9D5FD6', '#3A8C1C']
 
+function playVictorySound() {
+  try {
+    const ctx = new AudioContext()
+    // Fanfarra ascendente: C5 E5 G5 C6
+    const notes = [523.25, 659.25, 783.99, 1046.5]
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator()
+      const gain = ctx.createGain()
+      osc.connect(gain)
+      gain.connect(ctx.destination)
+      osc.type = 'sine'
+      osc.frequency.value = freq
+      const t = ctx.currentTime + i * 0.13
+      gain.gain.setValueAtTime(0, t)
+      gain.gain.linearRampToValueAtTime(0.28, t + 0.02)
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.38)
+      osc.start(t)
+      osc.stop(t + 0.38)
+    })
+  } catch { /* AudioContext bloqueado — ignora silenciosamente */ }
+}
+
 interface Particle {
   x: number
   y: number
@@ -66,6 +88,8 @@ export default function WinnerOverlay({ auction, isWinner = false, onClose }: Pr
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+
+    playVictorySound()
 
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReduced) return
@@ -125,7 +149,17 @@ export default function WinnerOverlay({ auction, isWinner = false, onClose }: Pr
               <span className={styles.bidLabel}>Lance vencedor</span>
               <span className={styles.bidValue}>{fmt(winner.value)}</span>
             </div>
-            <p className={styles.winnerName}>{winner.user}</p>
+            <p className={styles.winnerName}>
+              {winner.user.split('').map((char, i) => (
+                <span
+                  key={i}
+                  className={styles.winnerChar}
+                  style={{ animationDelay: `${0.55 + i * 0.07}s` }}
+                >
+                  {char === ' ' ? ' ' : char}
+                </span>
+              ))}
+            </p>
           </>
         ) : (
           <>
