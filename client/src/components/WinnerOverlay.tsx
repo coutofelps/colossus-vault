@@ -63,7 +63,7 @@ function spawnParticles(count: number, width: number): Particle[] {
   }))
 }
 
-export default function WinnerOverlay({ auction, isWinner = false, onClose }: Props) {
+export default function WinnerOverlay({ auction, onClose }: Props) {
   const navigate = useNavigate()
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const rafRef = useRef<number>(0)
