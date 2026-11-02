@@ -89,15 +89,6 @@ export default function AuctionDetail() {
                     Anti-snipe {auction.antiSnipe}min
                   </span>
                 )}
-                {isActive && (
-                  <button
-                    type="button"
-                    className={styles.simulateBtn}
-                    onClick={() => setShowEndAnimation(true)}
-                  >
-                    Simular vitória
-                  </button>
-                )}
               </div>
 
               <p className={styles.brand}>{auction.brand} · {auction.scale}</p>
@@ -179,6 +170,16 @@ export default function AuctionDetail() {
                 >
                   {isActive ? 'Dar Lance' : 'Ver resultado'}
                 </Button>
+
+                {isActive && (
+                  <button
+                    type="button"
+                    className={styles.simulateBtn}
+                    onClick={() => setShowEndAnimation(true)}
+                  >
+                    Simular vitória
+                  </button>
+                )}
               </div>
             </div>
           </div>
