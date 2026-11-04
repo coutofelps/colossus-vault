@@ -132,16 +132,6 @@ export default function AuctionDetail() {
                   {isActive ? 'Dar Lance' : 'Ver resultado'}
                 </Button>
 
-                {isActive && (
-                  <button
-                    type="button"
-                    className={styles.simulateBtn}
-                    onClick={() => setShowEndAnimation(true)}
-                  >
-                    Simular vitória
-                  </button>
-                )}
-
               </div>
             </div>
           </div>
@@ -188,6 +178,7 @@ export default function AuctionDetail() {
           auction={auction}
           onClose={() => setBidModalOpen(false)}
           onConfirm={() => setBidModalOpen(false)}
+          onSimulateWin={isActive ? () => setShowEndAnimation(true) : undefined}
         />
       )}
 

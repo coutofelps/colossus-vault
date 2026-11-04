@@ -7,13 +7,14 @@ interface Props {
   auction: Auction
   onClose: () => void
   onConfirm: (value: number, proxy: boolean, proxyMax?: number) => void
+  onSimulateWin?: () => void
 }
 
 function getThumb(auction: Auction) {
-  return `/${auction.imageSlug}/001.${auction.imageExt}`
+  return `/statues/${auction.imageSlug}/001.${auction.imageExt}`
 }
 
-export default function BidModal({ auction, onClose, onConfirm }: Props) {
+export default function BidModal({ auction, onClose, onConfirm, onSimulateWin }: Props) {
   const minBid = auction.currentBid + auction.increment
   const [value, setValue] = useState(minBid.toString())
   const [proxyEnabled, setProxyEnabled] = useState(false)
@@ -184,6 +185,15 @@ export default function BidModal({ auction, onClose, onConfirm }: Props) {
           <button type="button" className={styles.cancelBtn} onClick={onClose}>
             Cancelar
           </button>
+          {onSimulateWin && (
+            <button
+              type="button"
+              className={styles.simulateBtn}
+              onClick={() => { onSimulateWin(); onClose() }}
+            >
+              Simular vitória
+            </button>
+          )}
         </div>
       </div>
     </div>
