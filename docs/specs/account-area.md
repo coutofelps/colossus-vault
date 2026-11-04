@@ -24,7 +24,7 @@ Objetivos da área logada:
 | Rota | Página |
 |---|---|
 | `/dashboard` | Dashboard: lances ativos e minha loja |
-| `/bids` | Meus Lances — a implementar |
+| `/bids` | Meus Lances |
 | `/payments` | Meus Pagamentos |
 | `/account` | Dados da Conta |
 

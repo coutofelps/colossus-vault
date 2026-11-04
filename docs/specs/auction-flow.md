@@ -123,6 +123,7 @@ Quando o cronômetro zera, um overlay de tela toda é exibido sobre a página do
 
 - O overlay é disparado quando o cronômetro zera **e o usuário logado é o vencedor do leilão**.
 - Usuários não vencedores e visitantes não logados não veem o overlay — a página apenas transita para o estado `ENCERRADO` normalmente.
+- **MVP / desenvolvimento:** o botão "Simular vitória" dentro do Modal de Lance também dispara o overlay manualmente, independentemente do estado real do leilão ou do usuário logado. Esse gatilho deve ser removido antes de ir para produção.
 - Pode ser fechado manualmente pelo botão "Fechar".
 - Auto-fechamento após **8 segundos** caso o usuário não interaja.
 - Após fechar, a página do leilão exibe o estado `ENCERRADO` normalmente (badge, cronômetro zerado, histórico de lances).

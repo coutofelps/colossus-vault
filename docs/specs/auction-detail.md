@@ -66,6 +66,7 @@ Aberto ao clicar em **DAR LANCE**. Overlay com card centralizado.
 | Toggle Lance Proxy | Checkbox/toggle com label "Lance Proxy"; quando ativado, exibe campo "Seu valor máximo" e hint explicativo |
 | Botão **Confirmar lance** | Primário — fundo `--acid`, texto `--abyss`; desabilitado se valor < mínimo |
 | Botão **Cancelar** | Outline — fecha o modal sem ação |
+| Botão **Simular vitória** | Visível apenas em desenvolvimento (MVP); fundo amarelo `#FFD600`; dispara o overlay de vencedor e fecha o modal |
 
 ### Validação
 
