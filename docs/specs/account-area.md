@@ -38,7 +38,7 @@ Página inicial da área logada. Exibe botão **Sair** (redireciona para `/`) e 
 
 ### Seção: Leilões
 
-Lista os leilões em que o usuário já deu pelo menos um lance e que ainda estão `ATIVO`. Exibe até 6 cards. Link "Ver todos" aparece quando há 6 ou mais itens, apontando para `/bids`.
+Lista os leilões em que o usuário já deu pelo menos um lance e que ainda estão `ATIVO`. Exibe até 6 cards. Link **"Meus lances"** sempre visível no cabeçalho da seção, apontando para `/bids`; quando há 6 ou mais itens, o label muda para **"Ver todos"**.
 
 Cada card exibe: thumbnail, título, **seu lance**, **lance atual**, status (**Na liderança** / **Superado**), countdown compacto e link para a página do leilão.
 
@@ -54,23 +54,24 @@ Reservada para itens que o comprador colocou à venda como vendedor. Exibe botã
 
 ---
 
-## Meus Lances (`/bids`) — a implementar
+## Meus Lances (`/bids`)
 
-Lista todos os lances dados pelo usuário, dividida em duas abas: **Ativos** e **Encerrados**.
+Lista todos os lances dados pelo usuário, dividida em duas abas: **Ativos** e **Encerrados**. Cada aba exibe um contador com o total de itens. "Área do Comprador" na Navbar fica ativo nesta rota.
 
 ### Aba Ativos
 
-Mesmos cards do Dashboard, com link "Ver todos" apontando aqui.
+Mesmos cards do Dashboard (glow pulsante verde/vermelho, countdown, badge Proxy). Clicar no card navega para `/auctions/:id`.
 
 ### Aba Encerrados
 
 | Campo exibido | Detalhe |
 |---|---|
 | Thumbnail | Imagem do lote |
-| Título | Link para `/auctions/:id` |
-| Seu maior lance | Valor máximo enviado |
-| Resultado | **Vencedor** ou **Não venceu** |
-| Data de encerramento | Formato dd/mm/aaaa |
+| Título | Navega para `/auctions/:id` ao clicar no card |
+| Maior lance | Valor em verde para vencedor, cinza para não venceu |
+| Resultado | Texto "Vencedor" (verde) ou "Não venceu" (cinza) |
+| Encerrado em | Formato dd/mm/aaaa |
+| Botão "Pagar →" | Visível apenas para itens vencidos — navega para `/payments` |
 
 ---
 

@@ -11,6 +11,7 @@ import UnderDevelopment from './pages/UnderDevelopment'
 import Dashboard from './pages/Dashboard'
 import Account from './pages/Account'
 import Payments from './pages/Payments'
+import Bids from './pages/Bids'
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +28,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/account" element={<Account />} />
         <Route path="/payments" element={<Payments />} />
+        <Route path="/bids" element={<Bids />} />
       </Routes>
       </AuthProvider>
     </BrowserRouter>

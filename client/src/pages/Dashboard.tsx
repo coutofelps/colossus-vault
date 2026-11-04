@@ -91,9 +91,9 @@ export default function Dashboard() {
                 <section className={styles.section}>
                   <div className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>Leilões</h2>
-                    {mockActiveBids.length >= 6 && (
-                      <Link to="/bids" className={styles.sectionAction}>Ver todos</Link>
-                    )}
+                    <Link to="/bids" className={styles.sectionAction}>
+                      {mockActiveBids.length >= 6 ? 'Ver todos' : 'Meus lances'}
+                    </Link>
                   </div>
                   <div className={styles.list}>
                     {mockActiveBids.slice(0, 6).map(item => (

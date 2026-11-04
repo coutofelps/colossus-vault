@@ -53,7 +53,12 @@ export default function Navbar() {
             {isLoggedIn && (
               <>
                 <li>
-                  <NavLink to="/dashboard" className={({ isActive }) => isActive ? styles.active : ''}>
+                  <NavLink
+                    to="/dashboard"
+                    className={({ isActive }) =>
+                      isActive || ['/bids', '/account'].includes(pathname) ? styles.active : ''
+                    }
+                  >
                     Área do Comprador
                   </NavLink>
                 </li>
@@ -107,7 +112,12 @@ export default function Navbar() {
         {isLoggedIn && (
           <>
             <div className={styles.mobileDivider} />
-            <NavLink to="/dashboard" className={({ isActive }) => `${styles.mobileLink} ${isActive ? styles.mobileLinkActive : ''}`}>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `${styles.mobileLink} ${isActive || ['/bids', '/account'].includes(pathname) ? styles.mobileLinkActive : ''}`
+              }
+            >
               Área do Comprador
             </NavLink>
             <div className={styles.mobileDivider} />

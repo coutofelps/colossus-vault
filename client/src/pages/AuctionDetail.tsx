@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Navbar from '../components/Navbar'
@@ -8,6 +8,7 @@ import Countdown from '../components/Countdown'
 import Button from '../components/Button'
 import ImageGallery from '../components/ImageGallery'
 import WinnerOverlay from '../components/WinnerOverlay'
+import BidModal from '../components/BidModal'
 import usePageTitle from '../hooks/usePageTitle'
 import { MOCK_AUCTIONS, getImages, fmt } from '../data/auctions'
 import styles from './AuctionDetail.module.css'
@@ -57,16 +58,7 @@ export default function AuctionDetail() {
   }, [])
   const isActive = auction.status === 'active' && !ended
 
-  const [proxyEnabled, setProxyEnabled] = useState(false)
-  const [proxyValue, setProxyValue] = useState('')
-  const proxyInputRef = useRef<HTMLInputElement>(null)
-
-  function handleProxyToggle() {
-    const next = !proxyEnabled
-    setProxyEnabled(next)
-    if (next) setTimeout(() => proxyInputRef.current?.focus(), 0)
-    else setProxyValue('')
-  }
+  const [bidModalOpen, setBidModalOpen] = useState(false)
 
   return (
     <div className={styles.page}>
@@ -97,9 +89,8 @@ export default function AuctionDetail() {
                 )}
               </div>
 
-              <p className={styles.brand}>{auction.brand} · {auction.scale}</p>
+              <p className={styles.brand}>{auction.brand} · {auction.scale} · <span className={styles.sellerInline}>por <strong>{auction.seller}</strong></span></p>
               <h1 className={styles.title}>{auction.title}</h1>
-              <p className={styles.seller}>por <strong>{auction.seller}</strong></p>
 
               {/* Caixa de lance */}
               <div className={styles.bidBox}>
@@ -131,48 +122,12 @@ export default function AuctionDetail() {
                   </p>
                 )}
 
-                {isActive && (
-                  <div className={styles.proxyWrap}>
-                    <button
-                      type="button"
-                      className={`${styles.proxyToggle} ${proxyEnabled ? styles.proxyToggleOn : ''}`}
-                      onClick={handleProxyToggle}
-                    >
-                      <span className={styles.proxyToggleBox} />
-                      Lance Proxy
-                    </button>
-                    {proxyEnabled && (
-                      <div className={styles.proxyField}>
-                        <label htmlFor="proxy-max" className={styles.proxyLabel}>
-                          Seu valor máximo
-                        </label>
-                        <div className={styles.proxyInputRow}>
-                          <span className={styles.proxyCurrency}>R$</span>
-                          <input
-                            ref={proxyInputRef}
-                            id="proxy-max"
-                            type="number"
-                            min={auction.currentBid + auction.increment}
-                            step={auction.increment}
-                            placeholder={(auction.currentBid + auction.increment).toString()}
-                            value={proxyValue}
-                            onChange={e => setProxyValue(e.target.value)}
-                            className={styles.proxyInput}
-                          />
-                        </div>
-                        <p className={styles.proxyHint}>
-                          O sistema dará o menor lance necessário para mantê-lo na liderança, até este limite. O valor máximo é oculto dos outros compradores.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-
                 <Button
                   variant={isActive ? 'primary' : 'outline'}
                   size="lg"
                   disabled={!isActive}
                   className={isActive ? styles.hideMobile : undefined}
+                  onClick={() => isActive && setBidModalOpen(true)}
                 >
                   {isActive ? 'Dar Lance' : 'Ver resultado'}
                 </Button>
@@ -194,7 +149,7 @@ export default function AuctionDetail() {
           {/* Botão fixo no fundo — mobile only */}
           {isActive && (
             <div className={styles.stickyBidBar}>
-              <Button variant="primary" size="lg" className={styles.stickyBtn}>Dar Lance</Button>
+              <Button variant="primary" size="lg" className={styles.stickyBtn} onClick={() => setBidModalOpen(true)}>Dar Lance</Button>
             </div>
           )}
 
@@ -227,6 +182,14 @@ export default function AuctionDetail() {
           </div>
         </div>
       </main>
+
+      {bidModalOpen && (
+        <BidModal
+          auction={auction}
+          onClose={() => setBidModalOpen(false)}
+          onConfirm={() => setBidModalOpen(false)}
+        />
+      )}
 
       {showEndAnimation && (
         <WinnerOverlay
